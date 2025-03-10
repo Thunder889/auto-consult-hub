@@ -26,7 +26,7 @@ const Cars = () => {
               Explorați selecția noastră de mașini premium verificate, cu istorice complete și garanție de calitate.
             </p>
           </div>
-          <CarsSection fullPage={true} />
+          <CarsSection fullPage />
         </div>
       </main>
       <Footer />
