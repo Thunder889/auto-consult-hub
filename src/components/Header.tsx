@@ -5,7 +5,11 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const Header = () => {
+interface HeaderProps {
+  scrollToForm?: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -24,12 +28,19 @@ const Header = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Services', path: '/services' },
-    { name: 'Cars', path: '/cars' },
+    { name: 'Acasă', path: '/' },
+    { name: 'Despre', path: '/about' },
+    { name: 'Servicii', path: '/services' },
+    { name: 'Mașini', path: '/cars' },
     { name: 'Contact', path: '/contact' }
   ];
+
+  const handleConsultationClick = (e: React.MouseEvent) => {
+    if (location.pathname === '/' && scrollToForm) {
+      e.preventDefault();
+      scrollToForm();
+    }
+  };
 
   return (
     <header 
@@ -67,11 +78,16 @@ const Header = () => {
           {/* Contact Button (Desktop) */}
           <div className="hidden md:block">
             <Button 
-              asChild 
               variant="outline"
               className="hover-lift rounded-full shadow-sm"
+              onClick={handleConsultationClick}
+              asChild={!scrollToForm || location.pathname !== '/'}
             >
-              <Link to="/contact">Get Free Consultation</Link>
+              {scrollToForm && location.pathname === '/' ? (
+                <button>Consultanță Gratuită</button>
+              ) : (
+                <Link to="/contact">Consultanță Gratuită</Link>
+              )}
             </Button>
           </div>
 
@@ -113,10 +129,15 @@ const Header = () => {
             </Link>
           ))}
           <Button 
-            asChild 
             className="w-full mt-4 rounded-full"
+            onClick={handleConsultationClick}
+            asChild={!scrollToForm || location.pathname !== '/'}
           >
-            <Link to="/contact">Get Free Consultation</Link>
+            {scrollToForm && location.pathname === '/' ? (
+              <button>Consultanță Gratuită</button>
+            ) : (
+              <Link to="/contact">Consultanță Gratuită</Link>
+            )}
           </Button>
         </div>
       </div>

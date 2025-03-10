@@ -10,43 +10,43 @@ const About = () => {
     window.scrollTo(0, 0);
     
     // Set page title
-    document.title = 'About Us | AutoLaComandă';
+    document.title = 'Despre Noi | AutoLaComandă';
   }, []);
 
   const values = [
     {
       icon: Users,
-      title: 'Client Focused',
-      description: 'We prioritize our clients\' needs and preferences above all else, ensuring a personalized experience from start to finish.'
+      title: 'Orientat spre Client',
+      description: 'Prioritizăm nevoile și preferințele clienților noștri mai presus de orice, asigurând o experiență personalizată de la început până la sfârșit.'
     },
     {
       icon: Lightbulb,
-      title: 'Expertise',
-      description: 'Our team brings years of industry knowledge and technical expertise to every consultation and vehicle acquisition.'
+      title: 'Expertiză',
+      description: 'Echipa noastră aduce ani de cunoștințe în industrie și expertiză tehnică pentru fiecare consultație și achiziție de vehicule.'
     },
     {
       icon: TrendingUp,
-      title: 'Transparency',
-      description: 'We believe in complete transparency with no hidden fees or commissions, ensuring you know exactly what you\'re paying for.'
+      title: 'Transparență',
+      description: 'Credem în transparența completă fără taxe sau comisioane ascunse, asigurându-vă că știți exact pentru ce plătiți.'
     },
     {
       icon: Heart,
-      title: 'Quality',
-      description: 'We never compromise on quality, ensuring every vehicle we source meets the highest standards of condition and reliability.'
+      title: 'Calitate',
+      description: 'Nu facem niciodată compromisuri în privința calității, asigurându-ne că fiecare vehicul pe care îl găsim îndeplinește cele mai înalte standarde de stare și fiabilitate.'
     }
   ];
 
   const benefits = [
-    'Free consultancy services for all clients',
-    'Unlimited vehicle search options based on your criteria',
-    'Complete transparency with no hidden fees',
-    'Comprehensive damage reports from suppliers',
-    'Verified mileage certification through fiscal invoices',
-    'Quality control by professional auction inspectors',
-    'Personalized vehicle recommendations',
-    'Negotiable commission starting at only 3%',
-    'VAT deductible on both vehicle value and commission',
-    'Access to auction platforms across Europe'
+    'Servicii de consultanță gratuite pentru toți clienții',
+    'Opțiuni nelimitate de căutare a vehiculelor bazate pe criteriile dumneavoastră',
+    'Transparență completă fără taxe ascunse',
+    'Rapoarte complete de daune de la furnizori',
+    'Certificare verificată a kilometrajului prin facturi fiscale',
+    'Control de calitate de către inspectori profesioniști de licitație',
+    'Recomandări personalizate de vehicule',
+    'Comision negociabil începând de la doar 3%',
+    'TVA deductibil atât pentru valoarea vehiculului, cât și pentru comision',
+    'Acces la platforme de licitație din toată Europa'
   ];
 
   return (
@@ -58,10 +58,10 @@ const About = () => {
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center animate-slide-up">
               <h1 className="text-4xl md:text-5xl font-bold text-primary tracking-tight mb-6">
-                About AutoLaComandă
+                Despre AutoLaComandă
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground mb-8">
-                Your trusted partner in premium vehicle acquisition with complete transparency and personalized service.
+                Partenerul dumneavoastră de încredere în achiziția de vehicule premium cu transparență completă și servicii personalizate.
               </p>
             </div>
           </div>
@@ -76,7 +76,7 @@ const About = () => {
                   <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
                     <img 
                       src="https://images.unsplash.com/photo-1551522435-a13afa10f103?auto=format&fit=crop&w=900&q=80" 
-                      alt="Our team consulting with a client" 
+                      alt="Echipa noastră consultând un client" 
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -88,20 +88,20 @@ const About = () => {
               
               <div className="animate-slide-up">
                 <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-6">
-                  Our Story
+                  Povestea Noastră
                 </h2>
                 <div className="space-y-4 text-muted-foreground">
                   <p>
-                    Founded with a passion for automobiles and a commitment to transparent business practices, AutoLaComandă began as a response to the challenges many face when purchasing second-hand vehicles.
+                    Fondată cu pasiune pentru automobile și un angajament pentru practici de afaceri transparente, AutoLaComandă a început ca răspuns la provocările cu care se confruntă mulți atunci când cumpără vehicule second-hand.
                   </p>
                   <p>
-                    Our team combines decades of experience in the automotive industry with a deep understanding of the European car market. We've established strong relationships with reputable suppliers and auction houses across Europe, allowing us to source the highest quality vehicles for our clients.
+                    Echipa noastră combină decenii de experiență în industria auto cu o înțelegere profundă a pieței auto europene. Am stabilit relații puternice cu furnizori de încredere și case de licitație din întreaga Europă, permițându-ne să găsim vehicule de cea mai înaltă calitate pentru clienții noștri.
                   </p>
                   <p>
-                    What sets us apart is our unique approach to consultancy. We offer completely free advice and unlimited car searches, with our commission starting at just 3% - significantly lower than industry standards and fully negotiable based on your specific requirements.
+                    Ceea ce ne diferențiază este abordarea noastră unică a consultanței. Oferim sfaturi complet gratuite și căutări nelimitate de mașini, cu comisionul nostru începând de la doar 3% - semnificativ mai mic decât standardele industriei și pe deplin negociabil în funcție de cerințele dvs. specifice.
                   </p>
                   <p>
-                    We believe in complete transparency, which is why we provide comprehensive documentation, including detailed damage reports from suppliers and verified mileage certification through fiscal invoices.
+                    Credem în transparență completă, motiv pentru care oferim documentație cuprinzătoare, inclusiv rapoarte detaliate de daune de la furnizori și certificarea verificată a kilometrajului prin facturi fiscale.
                   </p>
                 </div>
               </div>
@@ -114,10 +114,10 @@ const About = () => {
           <div className="container mx-auto px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center mb-16 animate-slide-up">
               <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-6">
-                Our Values
+                Valorile Noastre
               </h2>
               <p className="text-lg text-muted-foreground">
-                These core principles guide every aspect of our business and ensure we deliver exceptional service to our clients.
+                Aceste principii de bază ghidează fiecare aspect al afacerii noastre și asigură că oferim servicii excepționale clienților noștri.
               </p>
             </div>
             
@@ -144,10 +144,10 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
               <div className="order-2 lg:order-1 animate-slide-up">
                 <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-6">
-                  The Benefits of Working With Us
+                  Beneficiile Colaborării cu Noi
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  When you choose AutoLaComandă, you're choosing more than just a consultancy service – you're gaining a dedicated partner committed to finding your ideal vehicle with complete transparency.
+                  Când alegeți AutoLaComandă, alegeți mai mult decât un serviciu de consultanță – câștigați un partener dedicat angajat să găsească vehiculul ideal pentru dvs. cu transparență completă.
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -168,7 +168,7 @@ const About = () => {
                   <div className="aspect-square rounded-2xl overflow-hidden shadow-xl">
                     <img 
                       src="https://images.unsplash.com/photo-1597762470488-3877b1f538c6?auto=format&fit=crop&w=800&q=80" 
-                      alt="Customer receiving car keys" 
+                      alt="Client primind cheile mașinii" 
                       className="w-full h-full object-cover"
                     />
                   </div>

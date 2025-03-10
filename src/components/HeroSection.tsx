@@ -8,19 +8,23 @@ import { cn } from '@/lib/utils';
 const carImages = [
   {
     url: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Premium sedan on display',
+    alt: 'Sedan premium în expoziție',
   },
   {
-    url: 'https://images.unsplash.com/photo-1617814076668-601f52e9f7eb?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Luxury SUV on road',
+    url: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1920&q=80',
+    alt: 'SUV de lux pe drum',
   },
   {
     url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Sports car close-up',
+    alt: 'Mașină sport prim-plan',
   },
 ];
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  scrollToForm?: () => void;
+}
+
+const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [autoplayPaused, setAutoplayPaused] = useState(false);
@@ -94,19 +98,19 @@ const HeroSection = () => {
       <div className="relative z-20 h-full container mx-auto px-4 md:px-6 flex flex-col justify-center items-center text-center">
         <div className="animate-slide-up">
           <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-3xl mx-auto tracking-tight">
-            Premium Auto Consultation With Complete Transparency
+            Consultanță Auto Premium Cu Transparență Totală
           </h1>
           <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-            Expert guidance for acquiring your ideal second-hand vehicle with no hidden fees, comprehensive damage reports, and verified mileage certification.
+            Îndrumare de specialitate pentru achiziționarea vehiculului ideal second-hand fără comisioane ascunse, rapoarte complete de daune și certificare verificată a kilometrajului.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
             <Button 
-              asChild
               size="lg" 
               className="rounded-full px-8 py-6 text-base font-medium hover-lift"
+              onClick={scrollToForm}
             >
-              <Link to="/contact">Get Free Consultation</Link>
+              Consultanță Gratuită
             </Button>
             
             <Button 
@@ -122,7 +126,7 @@ const HeroSection = () => {
                 aria-label="Contact via WhatsApp"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
-                WhatsApp Contact
+                Contact WhatsApp
               </a>
             </Button>
           </div>

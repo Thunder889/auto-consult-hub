@@ -2,15 +2,15 @@
 import { useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import ServicesSection from '@/components/ServicesSection';
+import CarsSection from '@/components/CarsSection';
 
-const Services = () => {
+const Cars = () => {
   useEffect(() => {
     // Scroll to top on page load
     window.scrollTo(0, 0);
     
     // Set page title
-    document.title = 'Servicii | AutoLaComandă';
+    document.title = 'Mașini | AutoLaComandă';
   }, []);
 
   return (
@@ -20,13 +20,13 @@ const Services = () => {
         <div className="container mx-auto px-4 md:px-6 py-20">
           <div className="max-w-3xl mx-auto text-center mb-16 animate-slide-up">
             <h1 className="text-4xl md:text-5xl font-bold text-primary tracking-tight mb-6">
-              Servicii
+              Mașini Disponibile
             </h1>
             <p className="text-lg text-muted-foreground">
-              Oferim servicii complete de consultanță și achiziție auto, cu transparență totală și fără comisioane ascunse.
+              Explorați selecția noastră de mașini premium verificate, cu istorice complete și garanție de calitate.
             </p>
           </div>
-          <ServicesSection fullPage={true} />
+          <CarsSection fullPage={true} />
         </div>
       </main>
       <Footer />
@@ -34,4 +34,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default Cars;
