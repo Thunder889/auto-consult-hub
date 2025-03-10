@@ -1,12 +1,33 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect } from 'react';
+import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
+import ServicesSection from '@/components/ServicesSection';
+import CarsSection from '@/components/CarsSection';
+import ContactSection from '@/components/ContactSection';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const Index = () => {
+  useEffect(() => {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
+    // Set page title
+    document.title = 'AutoLaComandă - Premium Auto Consultancy Services';
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <main className="flex-grow">
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <CarsSection />
+        <ContactSection />
+      </main>
+      <Footer />
     </div>
   );
 };
