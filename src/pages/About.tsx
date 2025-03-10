@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { CheckCircle, Users, Lightbulb, TrendingUp, Heart } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { cn } from '@/lib/utils';
 
 const About = () => {
   useEffect(() => {
@@ -18,7 +17,7 @@ const About = () => {
     {
       icon: Users,
       title: 'Client Focused',
-      description: 'We prioritize our clients' needs and preferences above all else, ensuring a personalized experience from start to finish.'
+      description: 'We prioritize our clients\' needs and preferences above all else, ensuring a personalized experience from start to finish.'
     },
     {
       icon: Lightbulb,
@@ -28,7 +27,7 @@ const About = () => {
     {
       icon: TrendingUp,
       title: 'Transparency',
-      description: 'We believe in complete transparency with no hidden fees or commissions, ensuring you know exactly what you're paying for.'
+      description: 'We believe in complete transparency with no hidden fees or commissions, ensuring you know exactly what you\'re paying for.'
     },
     {
       icon: Heart,
