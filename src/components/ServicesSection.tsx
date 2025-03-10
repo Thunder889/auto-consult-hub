@@ -29,7 +29,11 @@ const ServiceCard = ({
   </div>
 );
 
-const ServicesSection = () => {
+interface ServicesSectionProps {
+  fullPage?: boolean;
+}
+
+const ServicesSection = ({ fullPage = false }: ServicesSectionProps) => {
   const services = [
     {
       icon: Search,
@@ -64,7 +68,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="section-padding bg-gray-50">
+    <section className={cn("section-padding bg-gray-50", { "py-0": fullPage })}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto mb-16 animate-slide-up">
           <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-4">
@@ -86,17 +90,19 @@ const ServicesSection = () => {
           ))}
         </div>
         
-        <div className="text-center animate-slide-up">
-          <Button 
-            asChild
-            className="rounded-full px-8 group"
-          >
-            <Link to="/services">
-              Explore All Services
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </Button>
-        </div>
+        {!fullPage && (
+          <div className="text-center animate-slide-up">
+            <Button 
+              asChild
+              className="rounded-full px-8 group"
+            >
+              <Link to="/services">
+                Explore All Services
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
