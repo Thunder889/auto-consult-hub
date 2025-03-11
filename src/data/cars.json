@@ -1,0 +1,94 @@
+{
+    "cars": [
+      {
+        "id": 1,
+        "title": "Audi Q5 Sportback",
+        "year": 2021,
+        "price": "€39,800",
+        "mileage": "35,000 km",
+        "location": "Germania",
+        "image": "https://images.unsplash.com/photo-1641326201918-3cafc641038e?auto=format&fit=crop&w=800&q=80",
+        "description": "Audi Q5 Sportback bine întreținut, cu caracteristici premium, kilometraj verificat și istoric complet de service.",
+        "externalLink": "https://example.com/listing/audi-q5",
+        "fullDetails": {
+          "engine": "2.0 TDI",
+          "power": "204 CP",
+          "transmission": "Automată",
+          "drive": "Quattro",
+          "fuel": "Diesel",
+          "color": "Argintiu Metalic",
+          "interior": "Piele Neagră",
+          "features": [
+            "Faruri LED Matrix",
+            "Navigație MMI",
+            "Scaune încălzite",
+            "Cameră 360°",
+            "Asistență la parcare",
+            "Bang & Olufsen Sound System",
+            "Geamuri fumurii",
+            "Jante aliaj 20\""
+          ]
+        }
+      },
+      {
+        "id": 2,
+        "title": "BMW 5 Series",
+        "year": 2020,
+        "price": "€36,500",
+        "mileage": "42,000 km",
+        "location": "Austria",
+        "image": "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
+        "description": "BMW Seria 5 elegant în stare excelentă, cu pachet premium, kilometraj redus și raport complet de inspecție.",
+        "externalLink": "https://example.com/listing/bmw-5-series",
+        "fullDetails": {
+          "engine": "3.0 TDI",
+          "power": "265 CP",
+          "transmission": "Automată",
+          "drive": "Spate",
+          "fuel": "Diesel",
+          "color": "Negru Safir",
+          "interior": "Piele Cognac",
+          "features": [
+            "BMW Live Cockpit Professional",
+            "Sistem audio Harman Kardon",
+            "Scaune ventilate",
+            "Suspensie adaptivă",
+            "Pilot automat adaptiv",
+            "Parking Assistant Plus",
+            "Head-up Display",
+            "Sistem de alarmă"
+          ]
+        }
+      },
+      {
+        "id": 3,
+        "title": "Mercedes GLE Coupe",
+        "year": 2022,
+        "price": "€68,900",
+        "mileage": "18,000 km",
+        "location": "Germania",
+        "image": "https://images.unsplash.com/photo-1583267746897-2cf415887172?auto=format&fit=crop&w=800&q=80",
+        "description": "Mercedes GLE Coupe de lux cu utilizare minimă, garanție completă, întreținut la dealer și documentație completă.",
+        "externalLink": "https://example.com/listing/mercedes-gle",
+        "fullDetails": {
+          "engine": "3.0 AMG",
+          "power": "435 CP",
+          "transmission": "Automată 9G-Tronic",
+          "drive": "4MATIC",
+          "fuel": "Benzină",
+          "color": "Gri Selenite",
+          "interior": "Piele Nappa Neagră",
+          "features": [
+            "Pachet AMG Exterior",
+            "MBUX cu realitate augmentată",
+            "Sistem audio Burmester",
+            "Cameră 360°",
+            "Suspension AIRMATIC",
+            "Scaune dinamice",
+            "Pachet Night",
+            "Jante AMG 21\""
+          ]
+        }
+      }
+    ]
+}

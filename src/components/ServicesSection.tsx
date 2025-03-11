@@ -70,14 +70,7 @@ const ServicesSection = ({ fullPage = false }: ServicesSectionProps) => {
   return (
     <section className={cn("section-padding bg-gray-50", { "py-0": fullPage })}>
       <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center max-w-3xl mx-auto mb-16 animate-slide-up">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-4">
-            Our Premium Services
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            We provide end-to-end vehicle acquisition services with transparency at every step. From selection to documentation and delivery, we handle everything.
-          </p>
-        </div>
+
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-scale-in">
           {services.map((service, index) => (
