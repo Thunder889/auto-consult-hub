@@ -138,7 +138,7 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
             </Link>
           ))}
           <Button 
-            className="w-full mt-4 rounded-full text-black font-medium"
+            className="w-full mt-4 rounded-full text-white font-medium"
             onClick={handleConsultationClick}
             asChild={!scrollToForm || location.pathname !== '/'}
           >
