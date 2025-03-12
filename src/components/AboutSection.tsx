@@ -6,12 +6,12 @@ import { cn } from '@/lib/utils';
 
 const AboutSection = () => {
   const benefits = [
-    'Free consultation for all clients',
-    'Unlimited vehicle search options',
-    'Complete transparency with no hidden fees',
-    'Full documentation and damage reports',
-    'Verified mileage certification',
-    'Personalized vehicle selection',
+    'Consultație gratuită pentru toți clienții',
+    'Opțiuni nelimitate de căutare a vehiculelor',
+    'Transparență completă fără taxe ascunse',
+    'Documentație completă și rapoarte de daune',
+    'Certificare verificată a kilometrajului',
+    'Selecție personalizată a vehiculelor',
   ];
 
   return (
@@ -22,10 +22,10 @@ const AboutSection = () => {
             <div className="space-y-6">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-4">
-                  Premium Auto Consulting Services With Complete Transparency
+                  Servicii Premium de Consultanță Auto cu Transparență Completă
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                  We specialize in acquiring second-hand vehicles tailored to your specific needs and preferences. With our free consultancy service, we offer unlimited car searches while maintaining full transparency throughout the process.
+                  Ne specializăm în achiziționarea de vehicule second-hand adaptate nevoilor și preferințelor tale specifice. Cu serviciul nostru de consultanță gratuită, oferim căutări nelimitate de mașini, menținând transparența deplină pe tot parcursul procesului.
                 </p>
               </div>
               
@@ -43,7 +43,7 @@ const AboutSection = () => {
               
               <div className="pt-2">
                 <p className="text-muted-foreground mb-6">
-                  Our commission starts at only 3% and is fully negotiable based on your requirements, with absolutely no hidden fees.
+                  Comisionul nostru începe de la doar 3% și este complet negociabil în funcție de cerințele tale, fără niciun fel de taxe ascunse.
                 </p>
                 
                 <Button 
@@ -52,7 +52,7 @@ const AboutSection = () => {
                   className="group rounded-full px-6"
                 >
                   <Link to="/about">
-                    Learn More About Us
+                    Află Mai Multe Despre Noi
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
@@ -65,7 +65,7 @@ const AboutSection = () => {
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <img 
                   src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=800&q=80" 
-                  alt="Luxury car showroom" 
+                  alt="Showroom auto de lux" 
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -78,15 +78,15 @@ const AboutSection = () => {
               <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 glass-panel rounded-xl p-4 w-[90%] flex justify-between">
                 <div className="text-center">
                   <p className="text-2xl font-bold text-primary">100%</p>
-                  <p className="text-xs text-muted-foreground">Transparency</p>
+                  <p className="text-xs text-muted-foreground">Transparență</p>
                 </div>
                 <div className="text-center">
                   <p className="text-2xl font-bold text-primary">3%</p>
-                  <p className="text-xs text-muted-foreground">Starting Commission</p>
+                  <p className="text-xs text-muted-foreground">Comision Inițial</p>
                 </div>
                 <div className="text-center">
-                  <p className="text-2xl font-bold text-primary">Free</p>
-                  <p className="text-xs text-muted-foreground">Consultations</p>
+                  <p className="text-2xl font-bold text-primary">Gratis</p>
+                  <p className="text-xs text-muted-foreground">Consultații</p>
                 </div>
               </div>
             </div>
