@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
                   'text-sm font-medium animated-underline py-1',
                   location.pathname === link.path 
                     ? 'text-primary' 
-                    : 'text-gray-200 hover:text-white'
+                    : 'text-gray-100 hover:text-white'
                 )}
               >
                 {link.name}
