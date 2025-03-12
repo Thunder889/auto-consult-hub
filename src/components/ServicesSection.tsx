@@ -37,41 +37,39 @@ const ServicesSection = ({ fullPage = false }: ServicesSectionProps) => {
   const services = [
     {
       icon: Search,
-      title: 'Vehicle Selection',
-      description: 'Personalized search for your ideal vehicle based on your specific requirements and preferences.'
+      title: 'Selecție Vehicule',
+      description: 'Căutare personalizată pentru vehiculul ideal bazată pe cerințele și preferințele dvs. specifice.'
     },
     {
       icon: FileText,
-      title: 'Documentation',
-      description: 'Complete damage reports from suppliers and verified mileage certification through fiscal invoices.'
+      title: 'Documentație',
+      description: 'Rapoarte complete de daune de la furnizori și certificare verificată a kilometrajului prin facturi fiscale.'
     },
     {
       icon: TrendingUp,
-      title: 'Transparent Pricing',
-      description: 'Clear pricing structure with no hidden fees. Commission starts at 3% and is fully negotiable.'
+      title: 'Prețuri Transparente',
+      description: 'Structură clară de prețuri fără taxe ascunse. Comisionul începe de la 3% și este complet negociabil.'
     },
     {
       icon: Truck,
-      title: 'Transportation',
-      description: 'All transportation and auction fees handled directly by our vetted suppliers, ensuring seamless delivery.'
+      title: 'Transport',
+      description: 'Toate taxele de transport și licitație sunt gestionate direct de furnizorii noștri verificați, asigurând livrare fără probleme.'
     },
     {
       icon: ShieldCheck,
-      title: 'Quality Control',
-      description: 'Vehicles inspected by professional auction inspectors to ensure quality and condition verification.'
+      title: 'Control Calitate',
+      description: 'Vehicule inspectate de inspectori profesioniști de licitație pentru a asigura verificarea calității și stării.'
     },
     {
       icon: FileText,
-      title: 'VAT Deduction',
-      description: 'VAT is fully deductible on both the vehicle value and our commission for eligible businesses.'
+      title: 'Deducere TVA',
+      description: 'TVA-ul este complet deductibil atât pentru valoarea vehiculului, cât și pentru comisionul nostru pentru firmele eligibile.'
     }
   ];
 
   return (
     <section className={cn("section-padding bg-gray-50", { "py-0": fullPage })}>
       <div className="container mx-auto px-4 md:px-6">
-
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-scale-in">
           {services.map((service, index) => (
             <ServiceCard 
@@ -90,7 +88,7 @@ const ServicesSection = ({ fullPage = false }: ServicesSectionProps) => {
               className="rounded-full px-8 group"
             >
               <Link to="/services">
-                Explore All Services
+                Explorează Toate Serviciile
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>

@@ -17,7 +17,7 @@ const Footer = () => {
               <h3 className="text-xl font-bold text-primary">AutoLaComandă</h3>
             </Link>
             <p className="text-muted-foreground">
-              Premium auto consultancy services with complete transparency. Specialized in second-hand vehicle acquisition tailored to your needs.
+              Servicii premium de consultanță auto cu transparență completă. Specializați în achiziția de vehicule second-hand adaptate nevoilor dumneavoastră.
             </p>
             <div className="flex space-x-4">
               <a 
@@ -25,7 +25,7 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Follow on Facebook"
+                aria-label="Urmărește-ne pe Facebook"
               >
                 <Facebook className="h-5 w-5" />
               </a>
@@ -34,7 +34,7 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Follow on Instagram"
+                aria-label="Urmărește-ne pe Instagram"
               >
                 <Instagram className="h-5 w-5" />
               </a>
@@ -43,7 +43,7 @@ const Footer = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Follow on LinkedIn"
+                aria-label="Urmărește-ne pe LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -53,14 +53,14 @@ const Footer = () => {
           {/* Quick Links */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-primary mb-6">
-              Quick Links
+              Linkuri Rapide
             </h3>
             <ul className="space-y-3">
               {[
-                { name: 'Home', path: '/' },
-                { name: 'About', path: '/about' },
-                { name: 'Services', path: '/services' },
-                { name: 'Cars', path: '/cars' },
+                { name: 'Acasă', path: '/' },
+                { name: 'Despre', path: '/about' },
+                { name: 'Servicii', path: '/services' },
+                { name: 'Mașini', path: '/cars' },
                 { name: 'Contact', path: '/contact' }
               ].map((link) => (
                 <li key={link.path}>
@@ -78,15 +78,15 @@ const Footer = () => {
           {/* Services */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-primary mb-6">
-              Services
+              Servicii
             </h3>
             <ul className="space-y-3">
               {[
-                { name: 'Vehicle Selection', path: '/services#selection' },
-                { name: 'Documentation', path: '/services#documentation' },
-                { name: 'Transparent Pricing', path: '/services#pricing' },
-                { name: 'Quality Control', path: '/services#quality' },
-                { name: 'Transport & Delivery', path: '/services#transport' },
+                { name: 'Selecție Vehicule', path: '/services#selection' },
+                { name: 'Documentație', path: '/services#documentation' },
+                { name: 'Prețuri Transparente', path: '/services#pricing' },
+                { name: 'Control Calitate', path: '/services#quality' },
+                { name: 'Transport și Livrare', path: '/services#transport' },
               ].map((service, index) => (
                 <li key={index}>
                   <Link 
@@ -103,7 +103,7 @@ const Footer = () => {
           {/* Contact */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-primary mb-6">
-              Contact Us
+              Contactează-ne
             </h3>
             <ul className="space-y-4">
               <li>
@@ -136,7 +136,7 @@ const Footer = () => {
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
-                    WhatsApp Contact
+                    Contact WhatsApp
                   </a>
                 </Button>
               </li>
@@ -148,20 +148,20 @@ const Footer = () => {
         <div className="pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-muted-foreground text-sm">
-              © {currentYear} AutoLaComandă. All rights reserved.
+              © {currentYear} AutoLaComandă. Toate drepturile rezervate.
             </p>
             <div className="flex space-x-6 text-sm">
               <Link 
                 to="/privacy-policy" 
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                Privacy Policy
+                Politica de Confidențialitate
               </Link>
               <Link 
                 to="/terms-of-service" 
                 className="text-muted-foreground hover:text-primary transition-colors"
               >
-                Terms of Service
+                Termeni și Condiții
               </Link>
             </div>
           </div>

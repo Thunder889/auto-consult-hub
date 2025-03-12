@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
                   'text-sm font-medium animated-underline py-1',
                   location.pathname === link.path 
                     ? 'text-primary' 
-                    : 'text-muted-foreground hover:text-primary'
+                    : 'text-gray-200 hover:text-white'
                 )}
               >
                 {link.name}
@@ -79,7 +79,7 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
           <div className="hidden md:block">
             <Button 
               variant="outline"
-              className="hover-lift rounded-full shadow-sm"
+              className="hover-lift rounded-full shadow-sm text-white border-white/50 hover:bg-white/10"
               onClick={handleConsultationClick}
               asChild={!scrollToForm || location.pathname !== '/'}
             >
@@ -98,9 +98,9 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-primary" />
+              <X className="h-6 w-6 text-white" />
             ) : (
-              <Menu className="h-6 w-6 text-primary" />
+              <Menu className="h-6 w-6 text-white" />
             )}
           </button>
         </div>

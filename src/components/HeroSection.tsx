@@ -149,7 +149,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
                 ? 'bg-white scale-100' 
                 : 'bg-white/50 scale-75 hover:bg-white/70'
             )}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`Mergi la slide-ul ${index + 1}`}
           />
         ))}
       </div>
@@ -158,7 +158,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
       <button
         onClick={goToPrevSlide}
         className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full p-2 bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none transition-all duration-300"
-        aria-label="Previous slide"
+        aria-label="Slide-ul anterior"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
@@ -166,7 +166,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
       <button
         onClick={goToNextSlide}
         className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full p-2 bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none transition-all duration-300"
-        aria-label="Next slide"
+        aria-label="Slide-ul următor"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
