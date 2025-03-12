@@ -65,9 +65,13 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
                 to={link.path}
                 className={cn(
                   'text-sm font-medium animated-underline py-1',
-                  location.pathname === link.path 
-                    ? 'text-primary' 
-                    : 'text-gray-100 hover:text-white'
+                  isScrolled
+                    ? location.pathname === link.path 
+                      ? 'text-black' 
+                      : 'text-gray-600 hover:text-black'
+                    : location.pathname === link.path 
+                      ? 'text-primary' 
+                      : 'text-gray-100 hover:text-white'
                 )}
               >
                 {link.name}
@@ -79,7 +83,12 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
           <div className="hidden md:block">
             <Button 
               variant="outline"
-              className="hover-lift rounded-full shadow-sm text-white border-white/50 hover:bg-white/10"
+              className={cn(
+                "hover-lift rounded-full shadow-sm",
+                isScrolled 
+                  ? "text-primary border-primary/50 hover:bg-primary/10" 
+                  : "text-white border-white/50 hover:bg-white/10"
+              )}
               onClick={handleConsultationClick}
               asChild={!scrollToForm || location.pathname !== '/'}
             >
@@ -98,9 +107,9 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
-              <X className="h-6 w-6 text-white" />
+              <X className={cn("h-6 w-6", isScrolled ? "text-gray-800" : "text-white")} />
             ) : (
-              <Menu className="h-6 w-6 text-white" />
+              <Menu className={cn("h-6 w-6", isScrolled ? "text-gray-800" : "text-white")} />
             )}
           </button>
         </div>
