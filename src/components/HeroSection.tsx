@@ -100,8 +100,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
             <Button 
-              size="lg" 
-              className="rounded-full px-8 py-6 text-base font-medium hover-lift text-black"
+              variant="outline" 
+              size="lg"
+              className="rounded-full px-8 py-6 text-base font-medium bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white hover-lift"
+             
               onClick={scrollToForm}
             >
               Consultanță Gratuită
