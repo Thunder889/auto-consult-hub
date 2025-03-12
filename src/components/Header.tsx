@@ -84,10 +84,10 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
             <Button 
               variant="outline"
               className={cn(
-                "hover-lift rounded-full shadow-sm",
+                "hover-lift rounded-full shadow-sm text-black font-medium",
                 isScrolled 
-                  ? "text-primary border-primary/50 hover:bg-primary/10" 
-                  : "text-white border-white/50 hover:bg-white/10"
+                  ? "border-primary/50 hover:bg-primary/10" 
+                  : "border-white/50 hover:bg-white/10"
               )}
               onClick={handleConsultationClick}
               asChild={!scrollToForm || location.pathname !== '/'}
@@ -138,7 +138,7 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
             </Link>
           ))}
           <Button 
-            className="w-full mt-4 rounded-full"
+            className="w-full mt-4 rounded-full text-black font-medium"
             onClick={handleConsultationClick}
             asChild={!scrollToForm || location.pathname !== '/'}
           >

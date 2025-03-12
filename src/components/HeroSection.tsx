@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
@@ -51,7 +50,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
     }, 500); // Match duration with CSS transition
   }, [isTransitioning, autoplayPaused]);
   
-  // Auto-advance slides every 5 seconds
   useEffect(() => {
     if (autoplayPaused) return;
     
@@ -59,13 +57,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
     return () => clearInterval(interval);
   }, [goToNextSlide, autoplayPaused]);
   
-  // Pause autoplay on hover or touch
   const pauseAutoplay = () => setAutoplayPaused(true);
   const resumeAutoplay = () => setAutoplayPaused(false);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Slider Images */}
       <div 
         className="absolute inset-0"
         onMouseEnter={pauseAutoplay}
@@ -91,10 +87,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
         ))}
       </div>
       
-      {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10"></div>
       
-      {/* Content */}
       <div className="relative z-20 h-full container mx-auto px-4 md:px-6 flex flex-col justify-center items-center text-center">
         <div className="animate-slide-up">
           <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-3xl mx-auto tracking-tight">
@@ -107,7 +101,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
             <Button 
               size="lg" 
-              className="rounded-full px-8 py-6 text-base font-medium hover-lift"
+              className="rounded-full px-8 py-6 text-base font-medium hover-lift text-black"
               onClick={scrollToForm}
             >
               Consultanță Gratuită
@@ -123,7 +117,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
                 href="https://wa.me/40000000000" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                aria-label="Contact via WhatsApp"
+                aria-label="Contact prin WhatsApp"
               >
                 <MessageCircle className="mr-2 h-5 w-5" />
                 Contact WhatsApp
@@ -133,7 +127,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
         </div>
       </div>
       
-      {/* Slider Controls */}
       <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center space-x-3">
         {carImages.map((_, index) => (
           <button
@@ -154,11 +147,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
         ))}
       </div>
       
-      {/* Arrow Controls */}
       <button
         onClick={goToPrevSlide}
         className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full p-2 bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none transition-all duration-300"
-        aria-label="Slide-ul anterior"
+        aria-label="Imaginea anterioară"
       >
         <ChevronLeft className="h-6 w-6" />
       </button>
@@ -166,7 +158,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
       <button
         onClick={goToNextSlide}
         className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full p-2 bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none transition-all duration-300"
-        aria-label="Slide-ul următor"
+        aria-label="Imaginea următoare"
       >
         <ChevronRight className="h-6 w-6" />
       </button>
