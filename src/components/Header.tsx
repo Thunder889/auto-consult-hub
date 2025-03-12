@@ -71,7 +71,7 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
                       : 'text-gray-600 hover:text-black'
                     : location.pathname === link.path 
                       ? 'text-primary' 
-                      : 'text-gray-100 hover:text-white'
+                      : 'text-gray-300 hover:text-gray-400'
                 )}
               >
                 {link.name}
@@ -107,9 +107,9 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
             aria-label="Toggle Menu"
           >
             {mobileMenuOpen ? (
-              <X className={cn("h-6 w-6", isScrolled ? "text-gray-800" : "text-white")} />
+              <X className={cn("h-6 w-6", isScrolled ? "text-gray-800" : "text-gray-400")} />
             ) : (
-              <Menu className={cn("h-6 w-6", isScrolled ? "text-gray-800" : "text-white")} />
+              <Menu className={cn("h-6 w-6", isScrolled ? "text-gray-800" : "text-gray-400")} />
             )}
           </button>
         </div>
