@@ -4,9 +4,10 @@ import { Image } from 'astro:assets';
 
 interface Props {
   aboutImageUrl?: string;
+  aboutImage?: ImageMetadata;
 }
 
-const { aboutImageUrl } = Astro.props;
+const { aboutImageUrl, aboutImage } = Astro.props;
 // Use a fallback image if prop is not provided
 const imageUrl = aboutImageUrl || '/images/about-image.jpg';
 ---
@@ -40,11 +41,24 @@ const imageUrl = aboutImageUrl || '/images/about-image.jpg';
         "relative rounded-lg overflow-hidden shadow-xl order-1 md:order-2",
         "before:absolute before:inset-0 before:bg-black/10 before:z-10"
       )}>
-        <img 
-          src={imageUrl} 
-          alt="Echipa noastră de consultanți auto" 
-          class="w-full h-auto object-cover"
-        />
+        {aboutImage ? (
+          <Image 
+            src={aboutImage} 
+            alt="Echipa noastră de consultanți auto"
+            width={800}
+            height={600}
+            format="webp"
+            quality={90}
+            class="w-full h-auto object-cover"
+          />
+        ) : (
+          <img 
+            src={imageUrl} 
+            alt="Echipa noastră de consultanți auto" 
+            class="w-full h-auto object-cover"
+            loading="lazy"
+          />
+        )}
       </div>
     </div>
   </div>

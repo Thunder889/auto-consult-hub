@@ -1,9 +1,10 @@
 ---
 import { cn } from "../lib/utils";
+import { Image } from 'astro:assets';
 
 // Define the types for carousel images
 interface CarouselImage {
-  src: string;
+  src: string | ImageMetadata;
   alt: string;
   title?: string;
   description?: string;
@@ -39,206 +40,221 @@ const slideContent = [
   }
 ];
 
-// If carouselImages is empty, use the legacy props to create a fallback array
-const images = carouselImages.length > 0
-  ? carouselImages
-  : [
-      { src: heroDesktopUrl || '/src/assets/car3.jpg', alt: "Luxury car" },
-      { src: heroMobileUrl || '/src/assets/car1.jpg', alt: "Premium car" },
-      { src: '/src/assets/car2.jpg', alt: "Executive car" }
-    ];
+// Determine if we're using the carousel images or static hero images
+const images = carouselImages.length > 0 ? carouselImages : [
+  { 
+    src: heroDesktopUrl || '/images/hero-default.jpg', 
+    alt: "Default hero image"
+  }
+];
 ---
 
-<section class="relative min-h-screen flex items-center">
-  <!-- Background overlay -->
-  <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40 z-10"></div>
-  
-  <!-- Carousel -->
-  <div class="absolute inset-0 bg-neutral-900 z-0">
-    <div class="embla h-full w-full overflow-hidden">
-      <div class="embla__container flex h-full">
-        {images.map((img: CarouselImage, index: number) => (
-          <div 
-            class="embla__slide flex-full h-full w-full flex-shrink-0"
-            style={{ 
-              flex: '0 0 100%',
-              backgroundImage: `url(${img.src})`,
-              backgroundPosition: "center",
-              backgroundSize: "cover"
-            }}
-            aria-label={img.alt}
-            data-index={index}
-          />
+<section class="relative h-screen overflow-hidden">
+  <!-- Carousel Container -->
+  <div class="embla overflow-hidden h-full">
+    <div class="embla__viewport h-full">
+      <div class="embla__container h-full flex">
+        {images.map((img, index) => (
+          <div class="embla__slide relative flex-[0_0_100%] h-full">
+            {typeof img.src === 'string' ? (
+              <div 
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat animate-fade-in" 
+                style={`background-image: url(${img.src})`}
+                aria-label={img.alt}
+              ></div>
+            ) : (
+              <Image 
+                src={img.src}
+                alt={img.alt}
+                width={1920}
+                height={1080}
+                format="webp"
+                quality={80}
+                class="object-cover w-full h-full absolute inset-0 animate-fade-in"
+              />
+            )}
+            <!-- Overlay -->
+            <div class="absolute inset-0 bg-black/50"></div>
+          </div>
         ))}
       </div>
     </div>
-  </div>
 
-  <!-- Carousel controls -->
-  <button 
-    class="embla__prev absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 bg-white/25 hover:bg-white/50 text-white rounded-full p-3 md:p-4 transition-all duration-300 hover:scale-110 shadow-lg cursor-pointer border-2 border-white/30 hidden md:block"
-    aria-label="Previous slide"
-    type="button"
-  >
-    <!-- ChevronLeft icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 md:h-8 md:w-8"><polyline points="15 18 9 12 15 6"></polyline></svg>
-  </button>
-  
-  <button 
-    class="embla__next absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 bg-white/25 hover:bg-white/50 text-white rounded-full p-3 md:p-4 transition-all duration-300 hover:scale-110 shadow-lg cursor-pointer border-2 border-white/30 hidden md:block"
-    aria-label="Next slide"
-    type="button"
-  >
-    <!-- ChevronRight icon -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 md:h-8 md:w-8"><polyline points="9 18 15 12 9 6"></polyline></svg>
-  </button>
-
-  <!-- Dots indicator -->
-  <div class="embla__dots absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3">
-    {images.map((_: CarouselImage, index: number) => (
-      <button
-        class="embla__dot w-3 h-3 md:w-4 md:h-4 rounded-full transition-all shadow-md cursor-pointer border border-white/50 bg-white/40 hover:bg-white/70"
-        type="button"
-        data-index={index}
-        aria-label={`Go to slide ${index + 1}`}
-      />
-    ))}
+    <!-- Carousel Navigation Buttons -->
+    <button class="embla__prev absolute left-5 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    
+    <button class="embla__next absolute right-5 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 transition">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
   </div>
   
   <!-- Content -->
-  <div class="container mx-auto px-4 z-20 pt-24 pb-16 md:py-0">
-    <div class="md:max-w-[600px] lg:max-w-[700px]">
-      <h1 id="slide-title" class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-slide-up">
-        {slideContent[0].title}
-      </h1>
-      <p id="slide-description" class="text-lg md:text-xl text-gray-200 mb-8 animate-fade-in">
-        {slideContent[0].description}
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 animate-slide-up" style="animation-delay: 0.2s;">
-        <button
-          id="consult-button"
-          class="inline-flex items-center justify-center rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8 text-base py-2 rounded-full font-medium"
-        >
-          Consultanță Gratuită
-        </button>
-        <a 
-          href="/services"
-          class="inline-flex items-center justify-center rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white bg-white text-black hover:bg-white/90 h-11 px-8 text-base py-2"
-        >
-          Serviciile Noastre
-        </a>
+  <div class="absolute top-0 left-0 right-0 bottom-0 z-10 flex items-center">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="max-w-3xl mx-auto text-center text-white">
+        <h1 id="slide-title" class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 animate-slide-up">
+          {slideContent[0].title}
+        </h1>
+        <p id="slide-description" class="text-lg md:text-xl text-gray-200 mb-8 animate-slide-up animation-delay-100">
+          {slideContent[0].description}
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up animation-delay-200">
+          <button 
+            onclick="window.scrollToForm && window.scrollToForm()"
+            class="bg-primary text-white px-6 py-3 rounded-full font-medium hover:bg-primary/90 transition-colors inline-flex items-center justify-center"
+          >
+            Solicită Consultanță Gratuită
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 ml-2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+          <a 
+            href="/about" 
+            class="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-6 py-3 rounded-full font-medium hover:bg-white/20 transition-colors inline-flex items-center justify-center"
+          >
+            Află Mai Multe
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Dots Navigation -->
+  <div class="absolute bottom-8 left-0 right-0 z-10">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-center">
+        <div class="embla__dots flex space-x-2">
+          {images.map((_, i) => (
+            <button class={`embla__dot w-3 h-3 rounded-full ${i === 0 ? 'bg-white' : 'bg-white/50'}`}></button>
+          ))}
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Import Embla Carousel script -->
 <script>
-  import EmblaCarousel from 'embla-carousel';
-  
+  // Carousel functionality using Embla Carousel
+  let currentIndex = 0;
+  let autoplayTimer: number | null = null;
+  const slideContent = [
+    {
+      title: "Servicii premium de consultanță auto",
+      description: "Expertiza noastră, mașina visurilor tale. Spune-ne ce îți dorești, și noi îți găsim mașina perfectă."
+    },
+    {
+      title: "Consultanță auto personalizată",
+      description: "Eliminăm stresul achiziției. Verificăm istoricul mașinii, negociem prețul și te ghidăm în tot procesul."
+    },
+    {
+      title: "Mașini premium verificate",
+      description: "Acces la cele mai bune oferte de pe piață. Alegem doar vehicule cu istoric transparent și documentație completă."
+    }
+  ];
+
+  // Initialize carousel when DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
-    // Initialize carousel
-    const emblaNode = document.querySelector('.embla');
-    const slideContent = [
-      {
-        title: "Servicii premium de consultanță auto",
-        description: "Expertiza noastră, mașina visurilor tale. Spune-ne ce îți dorești, și noi îți găsim mașina perfectă."
-      },
-      {
-        title: "Consultanță auto personalizată",
-        description: "Eliminăm stresul achiziției. Verificăm istoricul mașinii, negociem prețul și te ghidăm în tot procesul."
-      },
-      {
-        title: "Mașini premium verificate",
-        description: "Acces la cele mai bune oferte de pe piață. Alegem doar vehicule cu istoric transparent și documentație completă."
-      }
-    ];
-    
-    if (!emblaNode) return;
-    
-    const emblaOptions = { loop: true };
-    const embla = EmblaCarousel(emblaNode, emblaOptions);
-    const prevBtn = document.querySelector('.embla__prev');
-    const nextBtn = document.querySelector('.embla__next');
+    const viewportNode = document.querySelector('.embla__viewport');
+    const prevButtonNode = document.querySelector('.embla__prev');
+    const nextButtonNode = document.querySelector('.embla__next');
     const dotsNode = document.querySelector('.embla__dots');
-    const slideTitle = document.getElementById('slide-title');
-    const slideDescription = document.getElementById('slide-description');
-    const consultButton = document.getElementById('consult-button');
+    const titleNode = document.getElementById('slide-title');
+    const descriptionNode = document.getElementById('slide-description');
     
-    // Handle content updates on slide change
-    const updateContent = () => {
-      const currentIndex = embla.selectedScrollSnap();
-      const currentSlide = slideContent[currentIndex % slideContent.length];
+    if (!viewportNode) return;
+    
+    let emblaApi: any;
+    
+    try {
+      // @ts-ignore - Embla will be loaded via CDN
+      emblaApi = EmblaCarousel(viewportNode, { loop: true });
       
-      if (slideTitle && slideDescription) {
-        slideTitle.textContent = currentSlide.title;
-        slideDescription.textContent = currentSlide.description;
-      }
-      
-      // Update active dot
-      const dots = document.querySelectorAll('.embla__dot');
-      dots.forEach((dot, index) => {
-        if (index === currentIndex) {
-          dot.classList.add('bg-white', 'scale-125');
-          dot.classList.remove('bg-white/40');
-        } else {
-          dot.classList.remove('bg-white', 'scale-125');
-          dot.classList.add('bg-white/40');
-        }
-      });
-    };
-    
-    // Set up event listeners
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => embla.scrollPrev());
-    }
-    
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => embla.scrollNext());
-    }
-    
-    // Set up dots
-    if (dotsNode) {
-      const dots = document.querySelectorAll('.embla__dot');
-      dots.forEach((dot) => {
-        dot.addEventListener('click', () => {
-          const index = parseInt(dot.getAttribute('data-index') || '0');
-          embla.scrollTo(index);
+      if (prevButtonNode && nextButtonNode) {
+        prevButtonNode.addEventListener('click', () => {
+          emblaApi.scrollPrev();
+          resetAutoplay();
         });
-      });
+        
+        nextButtonNode.addEventListener('click', () => {
+          emblaApi.scrollNext();
+          resetAutoplay();
+        });
+      }
+      
+      // Set up dots
+      if (dotsNode) {
+        const dots = Array.from(dotsNode.querySelectorAll('.embla__dot'));
+        
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => {
+            emblaApi.scrollTo(index);
+            resetAutoplay();
+          });
+        });
+        
+        emblaApi.on('select', () => {
+          currentIndex = emblaApi.selectedScrollSnap();
+          dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+              dot.classList.remove('bg-white/50');
+              dot.classList.add('bg-white');
+            } else {
+              dot.classList.remove('bg-white');
+              dot.classList.add('bg-white/50');
+            }
+          });
+          
+          // Update content text
+          updateContent();
+        });
+      }
+      
+      // Set up autoplay
+      startAutoplay();
+    } catch (error) {
+      console.error('Error initializing carousel:', error);
     }
     
-    // Set up consultation button
-    if (consultButton) {
-      consultButton.addEventListener('click', () => {
-        const formSection = document.getElementById('form-section');
-        if (formSection) {
-          formSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
+    function startAutoplay() {
+      autoplayTimer = window.setInterval(() => {
+        if (emblaApi) emblaApi.scrollNext();
+      }, 6000); // Change slide every 6 seconds
     }
     
-    // Set up auto-scroll
-    const autoplay = setInterval(() => {
-      if (embla.canScrollNext()) {
-        embla.scrollNext();
-      } else {
-        embla.scrollTo(0);
+    function resetAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        startAutoplay();
       }
-    }, 5000);
+    }
     
-    // Register event handlers
-    embla.on('select', updateContent);
-    embla.on('init', updateContent);
-    
-    // Update content initially
-    updateContent();
-    
-    // Cleanup on page unload
-    window.addEventListener('beforeunload', () => {
-      if (autoplay) {
-        clearInterval(autoplay);
+    function updateContent() {
+      if (titleNode && descriptionNode && currentIndex < slideContent.length) {
+        // Add exit animation
+        titleNode.classList.remove('animate-slide-up');
+        descriptionNode.classList.remove('animate-slide-up');
+        
+        // Force reflow
+        void titleNode.offsetWidth;
+        
+        // Update content
+        titleNode.textContent = slideContent[currentIndex].title;
+        descriptionNode.textContent = slideContent[currentIndex].description;
+        
+        // Add entrance animation
+        titleNode.classList.add('animate-slide-up');
+        descriptionNode.classList.add('animate-slide-up');
       }
-    });
+    }
+  });
+</script>
+
+<script is:inline>
+  // Load Embla Carousel from CDN
+  document.addEventListener('DOMContentLoaded', function() {
+    const script = document.createElement('script');
+    script.src = 'https://unpkg.com/embla-carousel/embla-carousel.umd.js';
+    script.async = true;
+    document.head.appendChild(script);
   });
 </script> 

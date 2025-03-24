@@ -18,47 +18,18 @@ import car3 from '../assets/car3.jpg';
 
 // Create an array of all carousel images
 const carouselImages = [
-  { src: car3.src, alt: "Luxury car exterior" },
-  { src: car1.src, alt: "Premium sedan" },
-  { src: car2.src, alt: "Executive vehicle" }
+  { src: car3, alt: "Luxury car exterior" },
+  { src: car1, alt: "Premium sedan" },
+  { src: car2, alt: "Executive vehicle" }
 ];
 
-// About section image - use original for now
-const aboutImageUrl = car2.src;
+// About section image
+const aboutImage = car2;
 
 // Generate an optimized about image - will be rendered below
 ---
 
 <Layout title="AutoLaComandă - Servicii Premium de Consultanță Auto">
-  <!-- Preload optimized images -->
-  <Image 
-    src={car1} 
-    alt="Premium sedan" 
-    width={1920} 
-    height={1080} 
-    format="webp" 
-    quality={80} 
-    class="hidden"
-  />
-  <Image 
-    src={car2} 
-    alt="Executive vehicle" 
-    width={800} 
-    height={600} 
-    format="webp" 
-    quality={90} 
-    class="hidden about-image-optimized"
-  />
-  <Image 
-    src={car3} 
-    alt="Luxury car exterior" 
-    width={1920} 
-    height={1080} 
-    format="webp" 
-    quality={80} 
-    class="hidden"
-  />
-
   <Providers client:load>
     <div class="flex flex-col min-h-screen">
       <Header />
@@ -67,7 +38,7 @@ const aboutImageUrl = car2.src;
         <div id="form-section">
           <CarRequestForm client:only="react" />
         </div>
-        <AboutSection aboutImageUrl={aboutImageUrl} />
+        <AboutSection aboutImage={aboutImage} />
         <ServicesSection />
         <CarsSection />
         <ContactSection />
@@ -100,37 +71,5 @@ const aboutImageUrl = car2.src;
         window.scrollToForm?.();
       }, 100);
     }
-
-    // Replace background images with optimized versions
-    const replaceImages = () => {
-      const carouselSlides = document.querySelectorAll('[style*="background-image"]');
-      const optimizedImages = document.querySelectorAll('img.hidden');
-      
-      if (carouselSlides.length > 0 && optimizedImages.length > 0) {
-        // Get optimized image URLs
-        const optimizedUrls = Array.from(optimizedImages).map((img) => {
-          return (img as HTMLImageElement).src;
-        });
-        
-        // Replace background images in carousel
-        carouselSlides.forEach((slide, index) => {
-          if (optimizedUrls[index]) {
-            (slide as HTMLElement).style.backgroundImage = `url(${optimizedUrls[index]})`;
-          }
-        });
-      }
-      
-      // Replace about section image with optimized version
-      const aboutImage = document.querySelector('.about-image-optimized') as HTMLImageElement;
-      if (aboutImage && aboutImage.src) {
-        const imageElements = document.querySelectorAll('.about-section img');
-        imageElements.forEach(img => {
-          (img as HTMLImageElement).src = aboutImage.src;
-        });
-      }
-    };
-
-    // Try to replace images after a short delay to ensure carousel is initialized
-    setTimeout(replaceImages, 500);
   });
 </script> 
