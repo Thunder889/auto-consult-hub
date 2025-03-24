@@ -1,12 +1,14 @@
-
-import { Link } from 'react-router-dom';
 import { 
   Search, 
   FileText, 
   TrendingUp, 
   Truck, 
   ShieldCheck, 
-  ArrowRight 
+  ArrowRight,
+  Car,
+  FileSearch,
+  UserCheck,
+  MessageSquare
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -36,48 +38,63 @@ interface ServicesSectionProps {
 const ServicesSection = ({ fullPage = false }: ServicesSectionProps) => {
   const services = [
     {
-      icon: Search,
-      title: 'Selecție Vehicule',
-      description: 'Căutare personalizată pentru vehiculul ideal bazată pe cerințele și preferințele dvs. specifice.'
+      icon: <Search className="h-10 w-10" />,
+      title: "Căutare Personalizată",
+      description: "Analizăm preferințele tale și bugetul disponibil pentru a găsi mașina perfectă pentru nevoile tale."
     },
     {
-      icon: FileText,
-      title: 'Documentație',
-      description: 'Rapoarte complete de daune de la furnizori și certificare verificată a kilometrajului prin facturi fiscale.'
+      icon: <FileSearch className="h-10 w-10" />,
+      title: "Verificare Completă",
+      description: "Inspecție tehnică detaliată, verificarea istoricului și a kilometrajului pentru a evita surprizele neplăcute."
     },
     {
-      icon: TrendingUp,
-      title: 'Prețuri Transparente',
-      description: 'Structură clară de prețuri fără taxe ascunse. Comisionul începe de la 3% și este complet negociabil.'
+      icon: <Car className="h-10 w-10" />,
+      title: "Test Drive",
+      description: "Organizăm test drive-uri pentru mașinile selectate, astfel încât să poți lua decizia corectă."
     },
     {
-      icon: Truck,
-      title: 'Transport',
-      description: 'Toate taxele de transport și licitație sunt gestionate direct de furnizorii noștri verificați, asigurând livrare fără probleme.'
+      icon: <UserCheck className="h-10 w-10" />,
+      title: "Negociere",
+      description: "Negociem în numele tău pentru a obține cel mai bun preț și condiții favorabile."
     },
     {
-      icon: ShieldCheck,
-      title: 'Control Calitate',
-      description: 'Vehicule inspectate de inspectori profesioniști de licitație pentru a asigura verificarea calității și stării.'
+      icon: <ShieldCheck className="h-10 w-10" />,
+      title: "Asistență Documentație",
+      description: "Te ajutăm cu toate formalitățile legale și documentația necesară pentru achiziție."
     },
     {
-      icon: FileText,
-      title: 'Deducere TVA',
-      description: 'TVA-ul este complet deductibil atât pentru valoarea vehiculului, cât și pentru comisionul nostru pentru firmele eligibile.'
+      icon: <MessageSquare className="h-10 w-10" />,
+      title: "Consultanță Post-Achiziție",
+      description: "Continuăm să-ți oferim suport și după achiziție pentru orice întrebări sau probleme."
     }
   ];
 
   return (
     <section className={cn("section-padding bg-gray-50", { "py-0": fullPage })}>
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate-scale-in">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            Serviciile Noastre
+          </h2>
+          <p className="text-lg text-gray-700">
+            Oferim o gamă completă de servicii de consultanță auto pentru a simplifica procesul de achiziție și a te ajuta să găsești mașina perfectă.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <ServiceCard 
-              key={index}
-              icon={service.icon}
-              title={service.title}
-              description={service.description}
-            />
+            <div 
+              key={index} 
+              className={cn(
+                "bg-white p-6 rounded-lg shadow-sm border border-gray-100",
+                "hover:shadow-md transition-shadow duration-300",
+                "flex flex-col items-start"
+              )}
+            >
+              <div className="text-primary mb-4">{service.icon}</div>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">{service.title}</h3>
+              <p className="text-gray-700">{service.description}</p>
+            </div>
           ))}
         </div>
         
@@ -87,10 +104,10 @@ const ServicesSection = ({ fullPage = false }: ServicesSectionProps) => {
               asChild
               className="rounded-full px-8 group"
             >
-              <Link to="/services">
+              <a href="/services">
                 Explorează Toate Serviciile
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </a>
             </Button>
           </div>
         )}

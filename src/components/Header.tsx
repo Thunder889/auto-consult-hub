@@ -1,20 +1,28 @@
-
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+
+// Declare the scrollToForm property on Window
+declare global {
+  interface Window {
+    scrollToForm?: () => void;
+  }
+}
 
 interface HeaderProps {
   scrollToForm?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
+const Header = ({ scrollToForm }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
+  const [currentPath, setCurrentPath] = useState('');
 
   useEffect(() => {
+    // Set current path on client side
+    setCurrentPath(window.location.pathname);
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
@@ -23,9 +31,18 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileMenuOpen(false);
-  }, [location.pathname]);
+  // Use window.scrollToForm if provided in props
+  const handleConsultationClick = (e: React.MouseEvent) => {
+    if (currentPath === '/' && scrollToForm) {
+      e.preventDefault();
+      scrollToForm();
+    }
+    
+    if (currentPath === '/' && !scrollToForm && window.scrollToForm) {
+      e.preventDefault();
+      window.scrollToForm();
+    }
+  };
 
   const navLinks = [
     { name: 'Acasă', path: '/' },
@@ -34,13 +51,6 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
     { name: 'Mașini', path: '/cars' },
     { name: 'Contact', path: '/contact' }
   ];
-
-  const handleConsultationClick = (e: React.MouseEvent) => {
-    if (location.pathname === '/' && scrollToForm) {
-      e.preventDefault();
-      scrollToForm();
-    }
-  };
 
   return (
     <header 
@@ -51,53 +61,63 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2">
+          <a href="/" className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-primary animated-underline">
-              AutoLaComandă
+              Smart Auto
             </span>
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 className={cn(
                   'text-sm font-medium animated-underline py-1',
                   isScrolled
-                    ? location.pathname === link.path 
+                    ? currentPath === link.path 
                       ? 'text-black' 
                       : 'text-gray-600 hover:text-black'
-                    : location.pathname === link.path 
+                    : currentPath === link.path 
                       ? 'text-primary' 
                       : 'text-gray-300 hover:text-gray-400'
                 )}
               >
                 {link.name}
-              </Link>
+              </a>
             ))}
           </nav>
 
           {/* Contact Button (Desktop) */}
           <div className="hidden md:block">
-            <Button 
-              variant="outline"
-              className={cn(
-                "hover-lift rounded-full shadow-sm text-black font-medium",
-                isScrolled 
-                  ? "border-primary/50 hover:bg-primary/10" 
-                  : "border-white/50 hover:bg-white/10"
-              )}
-              onClick={handleConsultationClick}
-              asChild={!scrollToForm || location.pathname !== '/'}
-            >
-              {scrollToForm && location.pathname === '/' ? (
-                <button>Consultanță Gratuită</button>
-              ) : (
-                <Link to="/contact">Consultanță Gratuită</Link>
-              )}
-            </Button>
+            {currentPath === '/' ? (
+              <Button 
+                variant="outline"
+                className={cn(
+                  "hover-lift rounded-full shadow-sm text-black font-medium",
+                  isScrolled 
+                    ? "border-primary/50 hover:bg-primary/10" 
+                    : "border-white/50 hover:bg-white/10"
+                )}
+                onClick={handleConsultationClick}
+              >
+                Consultanță Gratuită
+              </Button>
+            ) : (
+              <Button 
+                variant="outline"
+                className={cn(
+                  "hover-lift rounded-full shadow-sm text-black font-medium",
+                  isScrolled 
+                    ? "border-primary/50 hover:bg-primary/10" 
+                    : "border-white/50 hover:bg-white/10"
+                )}
+                asChild
+              >
+                <a href="/contact">Consultanță Gratuită</a>
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -124,30 +144,34 @@ const Header: React.FC<HeaderProps> = ({ scrollToForm }) => {
       >
         <div className="container mx-auto px-4 py-4 space-y-4">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.path}
-              to={link.path}
+              href={link.path}
               className={cn(
                 'block py-2 text-base font-medium',
-                location.pathname === link.path
+                currentPath === link.path
                   ? 'text-primary'
                   : 'text-muted-foreground hover:text-primary'
               )}
             >
               {link.name}
-            </Link>
+            </a>
           ))}
-          <Button 
-            className="w-full mt-4 rounded-full text-white font-medium"
-            onClick={handleConsultationClick}
-            asChild={!scrollToForm || location.pathname !== '/'}
-          >
-            {scrollToForm && location.pathname === '/' ? (
-              <button>Consultanță Gratuită</button>
-            ) : (
-              <Link to="/contact">Consultanță Gratuită</Link>
-            )}
-          </Button>
+          {currentPath === '/' ? (
+            <Button 
+              className="w-full mt-4 rounded-full text-white font-medium"
+              onClick={handleConsultationClick}
+            >
+              Consultanță Gratuită
+            </Button>
+          ) : (
+            <Button 
+              className="w-full mt-4 rounded-full text-white font-medium"
+              asChild
+            >
+              <a href="/contact">Consultanță Gratuită</a>
+            </Button>
+          )}
         </div>
       </div>
     </header>

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight, ExternalLink, Calendar, Activity, MapPin, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
@@ -8,10 +7,7 @@ import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import carsData from '@/data/cars.json';
 
-
 const { cars } = carsData;
-
-
 
 const CarCard = ({ car, onDetailsClick }: { car: typeof cars[0]; onDetailsClick: (car: typeof cars[0]) => void }) => (
   <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md group">
@@ -230,10 +226,10 @@ const CarsSection = ({ fullPage = false }: CarsSectionProps) => {
               className="rounded-full group"
               asChild
             >
-              <Link to="/cars">
+              <a href="/cars">
                 Vezi Toate Mașinile
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
+              </a>
             </Button>
           </div>
         )}
@@ -248,7 +244,7 @@ const CarsSection = ({ fullPage = false }: CarsSectionProps) => {
       <CarDetailsDialog 
         car={selectedCar} 
         open={dialogOpen} 
-        onOpenChange={setDialogOpen} 
+        onOpenChange={setDialogOpen}
       />
     </section>
   );

@@ -1,94 +1,48 @@
+import { cn } from "@/lib/utils";
 
-import { Link } from 'react-router-dom';
-import { CheckCircle, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+interface AboutSectionProps {
+  aboutImageUrl?: string;
+}
 
-const AboutSection = () => {
-  const benefits = [
-    'Consultație gratuită pentru toți clienții',
-    'Opțiuni nelimitate de căutare a vehiculelor',
-    'Transparență completă fără taxe ascunse',
-    'Documentație completă și rapoarte de daune',
-    'Certificare verificată a kilometrajului',
-    'Selecție personalizată a vehiculelor',
-  ];
+const AboutSection = ({ aboutImageUrl }: AboutSectionProps) => {
+  // Use a fallback image if prop is not provided
+  const imageUrl = aboutImageUrl || '/images/about-image.jpg';
 
   return (
-    <section className="section-padding bg-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="order-2 lg:order-1 animate-slide-up">
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-4">
-                  Servicii Premium de Consultanță Auto cu Transparență Completă
-                </h2>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                  Ne specializăm în achiziționarea de vehicule second-hand adaptate nevoilor și preferințelor tale specifice. Cu serviciul nostru de consultanță gratuită, oferim căutări nelimitate de mașini, menținând transparența deplină pe tot parcursul procesului.
-                </p>
+    <section className="py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div className="order-2 md:order-1">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+              Despre Noi
+            </h2>
+            <p className="text-lg text-gray-700 mb-6">
+              Cu peste 10 ani de experiență în domeniul auto, oferim servicii complete de consultanță pentru achiziția mașinii perfecte. Misiunea noastră este să eliminăm stresul și incertitudinea din procesul de cumpărare a unui vehicul.
+            </p>
+            <p className="text-lg text-gray-700 mb-6">
+              Cunoștințele noastre despre piața auto, rețeaua extinsă de contacte și atenția la detalii ne permit să găsim exact mașina pe care o cauți, la prețul potrivit, cu istoric verificat și fără surprize neplăcute.
+            </p>
+            <div className="grid grid-cols-2 gap-6 mt-8">
+              <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <div className="text-primary text-3xl font-bold mb-2">500+</div>
+                <p className="text-gray-600">Clienți mulțumiți</p>
               </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {benefits.map((benefit, index) => (
-                  <div 
-                    key={index} 
-                    className="flex items-start space-x-3"
-                  >
-                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{benefit}</span>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="pt-2">
-                <p className="text-muted-foreground mb-6">
-                  Comisionul nostru începe de la doar 3% și este complet negociabil în funcție de cerințele tale, fără niciun fel de taxe ascunse.
-                </p>
-                
-                <Button 
-                  asChild
-                  variant="outline" 
-                  className="group rounded-full px-6"
-                >
-                  <Link to="/about">
-                    Află Mai Multe Despre Noi
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
+              <div className="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <div className="text-primary text-3xl font-bold mb-2">10+</div>
+                <p className="text-gray-600">Ani de experiență</p>
               </div>
             </div>
           </div>
-          
-          <div className="order-1 lg:order-2 animate-scale-in">
-            <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&w=800&q=80" 
-                  alt="Showroom auto de lux" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              {/* Decorative Elements */}
-              <div className="absolute -bottom-6 -left-6 h-24 w-24 rounded-xl bg-primary/10 -z-10"></div>
-              <div className="absolute -top-6 -right-6 h-24 w-24 rounded-xl bg-primary/5 -z-10"></div>
-              
-              {/* Stats Overlay */}
-              <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 glass-panel rounded-xl p-4 w-[90%] flex justify-between">
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-primary">100%</p>
-                  <p className="text-xs text-muted-foreground">Transparență</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-primary">3%</p>
-                  <p className="text-xs text-muted-foreground">Comision Inițial</p>
-                </div>
-                <div className="text-center">
-                  <p className="text-2xl font-bold text-primary">Gratis</p>
-                  <p className="text-xs text-muted-foreground">Consultații</p>
-                </div>
-              </div>
+          <div className="order-1 md:order-2">
+            <div className={cn(
+              "relative rounded-lg overflow-hidden shadow-xl",
+              "before:absolute before:inset-0 before:bg-black/10 before:z-10"
+            )}>
+              <img 
+                src={imageUrl} 
+                alt="Echipa noastră de consultanți auto" 
+                className="w-full h-auto object-cover"
+              />
             </div>
           </div>
         </div>

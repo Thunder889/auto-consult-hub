@@ -1,169 +1,242 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { useState, useEffect, useCallback } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 
-const carImages = [
-  {
-    url: 'https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Sedan premium în expoziție',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1920&q=80',
-    alt: 'SUV de lux pe drum',
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1920&q=80',
-    alt: 'Mașină sport prim-plan',
-  },
-];
+// Declare the scrollToForm property on Window
+declare global {
+  interface Window {
+    scrollToForm?: () => void;
+  }
+}
+
+interface CarouselImage {
+  src: string;
+  alt: string;
+}
 
 interface HeroSectionProps {
   scrollToForm?: () => void;
+  carouselImages?: CarouselImage[];
+  // Keep the old props for backwards compatibility
+  heroDesktopUrl?: string;
+  heroMobileUrl?: string;
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ scrollToForm }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [autoplayPaused, setAutoplayPaused] = useState(false);
-  
-  const goToNextSlide = useCallback(() => {
-    if (isTransitioning || autoplayPaused) return;
-    
-    setIsTransitioning(true);
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carImages.length);
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 500); // Match duration with CSS transition
-  }, [isTransitioning, autoplayPaused]);
-  
-  const goToPrevSlide = useCallback(() => {
-    if (isTransitioning || autoplayPaused) return;
-    
-    setIsTransitioning(true);
-    setCurrentImageIndex((prevIndex) => (prevIndex - 1 + carImages.length) % carImages.length);
-    
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 500); // Match duration with CSS transition
-  }, [isTransitioning, autoplayPaused]);
-  
+const HeroSection = ({ 
+  scrollToForm, 
+  carouselImages = [], 
+  heroDesktopUrl, 
+  heroMobileUrl 
+}: HeroSectionProps) => {
+  // Use embla carousel with options
+  const [emblaRef, emblaApi] = useEmblaCarousel({ 
+    loop: true
+  });
+  const [prevBtnEnabled, setPrevBtnEnabled] = useState(true);
+  const [nextBtnEnabled, setNextBtnEnabled] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  // If carouselImages is empty, use the legacy props to create a fallback array
+  const images = carouselImages.length > 0
+    ? carouselImages
+    : [
+        { src: heroDesktopUrl || '/src/assets/car3.jpg', alt: "Luxury car" },
+        { src: heroMobileUrl || '/src/assets/car1.jpg', alt: "Premium car" },
+        { src: '/src/assets/car2.jpg', alt: "Executive car" }
+      ];
+
+  const scrollPrev = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (emblaApi) {
+      emblaApi.scrollPrev();
+      console.log("Previous button clicked", { 
+        time: new Date().toISOString(),
+        event: 'prev', 
+        target: e.target 
+      });
+    } else {
+      console.error("Embla API not available for prev click");
+    }
+  }, [emblaApi]);
+
+  const scrollNext = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (emblaApi) {
+      emblaApi.scrollNext();
+      console.log("Next button clicked", { 
+        time: new Date().toISOString(),
+        event: 'next', 
+        target: e.target 
+      });
+    } else {
+      console.error("Embla API not available for next click");
+    }
+  }, [emblaApi]);
+
+  const scrollTo = useCallback(
+    (index: number, e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (emblaApi) {
+        emblaApi.scrollTo(index);
+        console.log(`Scrolled to index ${index}`, { 
+          time: new Date().toISOString(),
+          event: 'scrollTo', 
+          index,
+          target: e.target 
+        });
+      } else {
+        console.error("Embla API not available for scrollTo", { index });
+      }
+    },
+    [emblaApi]
+  );
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+    setPrevBtnEnabled(emblaApi.canScrollPrev());
+    setNextBtnEnabled(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
   useEffect(() => {
-    if (autoplayPaused) return;
+    if (!emblaApi) return;
     
-    const interval = setInterval(goToNextSlide, 5000);
-    return () => clearInterval(interval);
-  }, [goToNextSlide, autoplayPaused]);
-  
-  const pauseAutoplay = () => setAutoplayPaused(true);
-  const resumeAutoplay = () => setAutoplayPaused(false);
+    console.log("Embla carousel initialized", {
+      time: new Date().toISOString(),
+      canScrollPrev: emblaApi.canScrollPrev(),
+      canScrollNext: emblaApi.canScrollNext(),
+      selectedIndex: emblaApi.selectedScrollSnap()
+    });
+    
+    // Initialize carousel
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+
+    // Set up auto-scroll
+    const autoplay = setInterval(() => {
+      if (emblaApi && emblaApi.canScrollNext()) {
+        emblaApi.scrollNext();
+      } else if (emblaApi) {
+        emblaApi.scrollTo(0);
+      }
+    }, 5000); // Change image every 5 seconds
+
+    return () => {
+      if (emblaApi) {
+        emblaApi.off("select", onSelect);
+        emblaApi.off("reInit", onSelect);
+      }
+      clearInterval(autoplay);
+    };
+  }, [emblaApi, onSelect]);
+
+  const handleScrollToForm = () => {
+    if (scrollToForm) {
+      scrollToForm();
+    } else if (window.scrollToForm) {
+      window.scrollToForm();
+    }
+  };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
-      <div 
-        className="absolute inset-0"
-        onMouseEnter={pauseAutoplay}
-        onMouseLeave={resumeAutoplay}
-        onTouchStart={pauseAutoplay}
-        onTouchEnd={resumeAutoplay}
-      >
-        {carImages.map((image, index) => (
-          <div
-            key={index}
-            className={cn(
-              'absolute inset-0 transition-opacity duration-1000 ease-in-out bg-black',
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-            )}
-          >
-            <img
-              src={image.url}
-              alt={image.alt}
-              className="h-full w-full object-cover opacity-70"
-              loading={index === 0 ? 'eager' : 'lazy'}
-            />
+    <section className="relative min-h-screen flex items-center">
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/40 z-10"></div>
+      
+      {/* Carousel */}
+      <div className="absolute inset-0 bg-neutral-900 z-0">
+        <div className="h-full w-full overflow-hidden" ref={emblaRef}>
+          <div className="flex h-full">
+            {images.map((img, index) => (
+              <div 
+                key={index} 
+                className="flex-full h-full w-full flex-shrink-0"
+                style={{ 
+                  flex: '0 0 100%',
+                  backgroundImage: `url(${img.src})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover"
+                }}
+                aria-label={img.alt}
+              />
+            ))}
           </div>
+        </div>
+      </div>
+
+      {/* Carousel controls - as separate elements with higher z-index for better clickability */}
+      <button 
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 bg-white/25 hover:bg-white/50 text-white rounded-full p-3 md:p-4 transition-all duration-300 hover:scale-110 shadow-lg cursor-pointer border-2 border-white/30"
+        onClick={scrollPrev}
+        aria-label="Previous slide"
+        type="button"
+      >
+        <ChevronLeft className="h-6 w-6 md:h-8 md:w-8" />
+      </button>
+      
+      <button 
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 bg-white/25 hover:bg-white/50 text-white rounded-full p-3 md:p-4 transition-all duration-300 hover:scale-110 shadow-lg cursor-pointer border-2 border-white/30"
+        onClick={scrollNext}
+        aria-label="Next slide"
+        type="button"
+      >
+        <ChevronRight className="h-6 w-6 md:h-8 md:w-8" />
+      </button>
+
+      {/* Dots indicator */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex gap-3">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            type="button"
+            className={cn(
+              "w-3 h-3 md:w-4 md:h-4 rounded-full transition-all shadow-md cursor-pointer border border-white/50",
+              selectedIndex === index
+                ? "bg-white scale-125"
+                : "bg-white/40 hover:bg-white/70"
+            )}
+            onClick={(e) => scrollTo(index, e)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
         ))}
       </div>
       
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10"></div>
-      
-      <div className="relative z-20 h-full container mx-auto px-4 md:px-6 flex flex-col justify-center items-center text-center">
-        <div className="animate-slide-up">
-          <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold mb-6 max-w-3xl mx-auto tracking-tight">
-            Consultanță Auto Premium Cu Transparență Totală
+      {/* Content */}
+      <div className="container mx-auto px-4 z-20 pt-24 pb-16 md:py-0">
+        <div className="md:max-w-[600px] lg:max-w-[700px]">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 animate-slide-up">
+            Servicii premium de consultanță auto
           </h1>
-          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-            Îndrumare de specialitate pentru achiziționarea vehiculului ideal second-hand fără comisioane ascunse, rapoarte complete de daune și certificare verificată a kilometrajului.
+          <p className="text-lg md:text-xl text-gray-200 mb-8 animate-fade-in">
+            Expertiza noastră, mașina visurilor tale. Spune-ne ce îți dorești, și noi îți găsim mașina perfectă.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-            <Button 
-              variant="outline" 
+          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: '0.2s' }}>
+            <Button
               size="lg"
-              className="rounded-full px-8 py-6 text-base font-medium bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white hover-lift"
-             
-              onClick={scrollToForm}
+              className="rounded-full font-medium text-base"
+              onClick={handleScrollToForm}
             >
               Consultanță Gratuită
             </Button>
-            
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="lg"
-              className="rounded-full px-8 py-6 text-base font-medium bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 hover:text-white hover-lift"
+              className="rounded-full font-medium text-base border-white text-white hover:bg-white/10"
               asChild
             >
-              <a 
-                href="https://wa.me/40000000000" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                aria-label="Contact prin WhatsApp"
-              >
-                <MessageCircle className="mr-2 h-5 w-5" />
-                Contact WhatsApp
+              <a href="/services">
+                Serviciile Noastre
               </a>
             </Button>
           </div>
         </div>
       </div>
-      
-      <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center space-x-3">
-        {carImages.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setIsTransitioning(true);
-              setCurrentImageIndex(index);
-              setTimeout(() => setIsTransitioning(false), 500);
-            }}
-            className={cn(
-              'w-2.5 h-2.5 rounded-full transition-all duration-300 focus:outline-none',
-              index === currentImageIndex 
-                ? 'bg-white scale-100' 
-                : 'bg-white/50 scale-75 hover:bg-white/70'
-            )}
-            aria-label={`Mergi la slide-ul ${index + 1}`}
-          />
-        ))}
-      </div>
-      
-      <button
-        onClick={goToPrevSlide}
-        className="absolute left-4 top-1/2 z-20 -translate-y-1/2 rounded-full p-2 bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none transition-all duration-300"
-        aria-label="Imaginea anterioară"
-      >
-        <ChevronLeft className="h-6 w-6" />
-      </button>
-      
-      <button
-        onClick={goToNextSlide}
-        className="absolute right-4 top-1/2 z-20 -translate-y-1/2 rounded-full p-2 bg-black/30 backdrop-blur-sm text-white hover:bg-black/50 focus:outline-none transition-all duration-300"
-        aria-label="Imaginea următoare"
-      >
-        <ChevronRight className="h-6 w-6" />
-      </button>
     </section>
   );
 };

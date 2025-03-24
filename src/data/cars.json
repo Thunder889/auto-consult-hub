@@ -7,7 +7,7 @@
         "price": "€39,800",
         "mileage": "35,000 km",
         "location": "Germania",
-        "image": "https://images.unsplash.com/photo-1641326201918-3cafc641038e?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/cars/car1.jpg",
         "description": "Audi Q5 Sportback bine întreținut, cu caracteristici premium, kilometraj verificat și istoric complet de service.",
         "externalLink": "https://example.com/listing/audi-q5",
         "fullDetails": {
@@ -37,7 +37,7 @@
         "price": "€36,500",
         "mileage": "42,000 km",
         "location": "Austria",
-        "image": "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/cars/car2.jpg",
         "description": "BMW Seria 5 elegant în stare excelentă, cu pachet premium, kilometraj redus și raport complet de inspecție.",
         "externalLink": "https://example.com/listing/bmw-5-series",
         "fullDetails": {
@@ -67,7 +67,7 @@
         "price": "€68,900",
         "mileage": "18,000 km",
         "location": "Germania",
-        "image": "https://images.unsplash.com/photo-1583267746897-2cf415887172?auto=format&fit=crop&w=800&q=80",
+        "image": "/images/cars/car3.jpg",
         "description": "Mercedes GLE Coupe de lux cu utilizare minimă, garanție completă, întreținut la dealer și documentație completă.",
         "externalLink": "https://example.com/listing/mercedes-gle",
         "fullDetails": {

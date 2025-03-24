@@ -1,0 +1,72 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import Providers from '@/components/Providers';
+import HeroSection from '@/components/HeroSection';
+import AboutSection from '@/components/AboutSection';
+import ServicesSection from '@/components/ServicesSection';
+import CarsSection from '@/components/CarsSection';
+import ContactSection from '@/components/ContactSection';
+import CarRequestForm from '@/components/CarRequestForm';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
+// Import all car images for the carousel
+import car1 from '../assets/car1.jpg';
+import car2 from '../assets/car2.jpg';
+import car3 from '../assets/car3.jpg';
+
+// Create an array of all carousel images
+const carouselImages = [
+  { src: car3.src, alt: "Luxury car exterior" },
+  { src: car1.src, alt: "Premium sedan" },
+  { src: car2.src, alt: "Executive vehicle" }
+];
+
+// About section image
+const aboutImageUrl = car2.src;
+---
+
+<Layout title="AutoLaComandă - Servicii Premium de Consultanță Auto">
+  <Providers client:load>
+    <div class="flex flex-col min-h-screen">
+      <Header client:load />
+      <main class="flex-grow">
+        <HeroSection client:only="react" carouselImages={carouselImages} />
+        <div id="form-section">
+          <CarRequestForm client:visible />
+        </div>
+        <AboutSection client:visible aboutImageUrl={aboutImageUrl} />
+        <ServicesSection client:visible />
+        <CarsSection client:visible />
+        <ContactSection client:visible />
+      </main>
+      <Footer />
+    </div>
+  </Providers>
+</Layout>
+
+<script>
+  // Consistent with the HeroSection.tsx declaration
+  declare global {
+    interface Window {
+      scrollToForm?: () => void;
+    }
+  }
+
+  // Handle scroll to form functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
+    // Handle any scroll-to-form clicks
+    const scrollToForm = () => {
+      const formSection = document.getElementById('form-section');
+      if (formSection) {
+        formSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
+    // Expose scrollToForm to window for React components to use
+    window.scrollToForm = scrollToForm;
+  });
+</script> 
