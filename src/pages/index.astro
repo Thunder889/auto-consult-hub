@@ -33,7 +33,7 @@ const aboutImageUrl = car2.src;
       <main class="flex-grow">
         <HeroSection client:only="react" carouselImages={carouselImages} />
         <div id="form-section">
-          <CarRequestForm client:visible />
+          <CarRequestForm client:only="react" />
         </div>
         <AboutSection client:visible aboutImageUrl={aboutImageUrl} />
         <ServicesSection client:visible />
@@ -68,5 +68,10 @@ const aboutImageUrl = car2.src;
 
     // Expose scrollToForm to window for React components to use
     window.scrollToForm = scrollToForm;
+
+    // Handle hash navigation
+    if (window.location.hash === '#form-section') {
+      scrollToForm();
+    }
   });
 </script> 

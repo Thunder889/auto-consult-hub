@@ -227,7 +227,7 @@ const HeroSection = ({
             <Button
               variant="outline"
               size="lg"
-              className="rounded-full font-medium text-base border-white text-white hover:bg-white/10"
+              className="rounded-full font-medium text-base border-white bg-white text-black hover:bg-white/90"
               asChild
             >
               <a href="/services">

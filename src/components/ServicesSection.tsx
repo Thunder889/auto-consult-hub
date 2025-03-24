@@ -99,7 +99,7 @@ const ServicesSection = ({ fullPage = false }: ServicesSectionProps) => {
         </div>
         
         {!fullPage && (
-          <div className="text-center animate-slide-up">
+          <div className="text-center mt-16 animate-slide-up">
             <Button 
               asChild
               className="rounded-full px-8 group"

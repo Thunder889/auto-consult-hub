@@ -33,14 +33,15 @@ const Header = ({ scrollToForm }: HeaderProps) => {
 
   // Use window.scrollToForm if provided in props
   const handleConsultationClick = (e: React.MouseEvent) => {
-    if (currentPath === '/' && scrollToForm) {
-      e.preventDefault();
-      scrollToForm();
-    }
-    
-    if (currentPath === '/' && !scrollToForm && window.scrollToForm) {
-      e.preventDefault();
-      window.scrollToForm();
+    e.preventDefault();
+    if (currentPath === '/') {
+      if (scrollToForm) {
+        scrollToForm();
+      } else if (window.scrollToForm) {
+        window.scrollToForm();
+      }
+    } else {
+      window.location.href = '/#form-section';
     }
   };
 
@@ -52,6 +53,15 @@ const Header = ({ scrollToForm }: HeaderProps) => {
     { name: 'Contact', path: '/contact' }
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    e.preventDefault();
+    if (path === '/') {
+      window.location.href = '/';
+    } else {
+      window.location.href = path;
+    }
+  };
+
   return (
     <header 
       className={cn(
@@ -61,7 +71,7 @@ const Header = ({ scrollToForm }: HeaderProps) => {
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
-          <a href="/" className="flex items-center space-x-2">
+          <a href="/" onClick={(e) => handleNavClick(e, '/')} className="flex items-center space-x-2">
             <span className="text-2xl font-bold text-primary animated-underline">
               Smart Auto
             </span>
@@ -73,6 +83,7 @@ const Header = ({ scrollToForm }: HeaderProps) => {
               <a
                 key={link.path}
                 href={link.path}
+                onClick={(e) => handleNavClick(e, link.path)}
                 className={cn(
                   'text-sm font-medium animated-underline py-1',
                   isScrolled
@@ -91,33 +102,18 @@ const Header = ({ scrollToForm }: HeaderProps) => {
 
           {/* Contact Button (Desktop) */}
           <div className="hidden md:block">
-            {currentPath === '/' ? (
-              <Button 
-                variant="outline"
-                className={cn(
-                  "hover-lift rounded-full shadow-sm text-black font-medium",
-                  isScrolled 
-                    ? "border-primary/50 hover:bg-primary/10" 
-                    : "border-white/50 hover:bg-white/10"
-                )}
-                onClick={handleConsultationClick}
-              >
-                Consultanță Gratuită
-              </Button>
-            ) : (
-              <Button 
-                variant="outline"
-                className={cn(
-                  "hover-lift rounded-full shadow-sm text-black font-medium",
-                  isScrolled 
-                    ? "border-primary/50 hover:bg-primary/10" 
-                    : "border-white/50 hover:bg-white/10"
-                )}
-                asChild
-              >
-                <a href="/contact">Consultanță Gratuită</a>
-              </Button>
-            )}
+            <Button 
+              variant="outline"
+              className={cn(
+                "hover-lift rounded-full shadow-sm text-black font-medium",
+                isScrolled 
+                  ? "border-primary/50 hover:bg-primary/10" 
+                  : "border-white/50 hover:bg-white/10"
+              )}
+              onClick={handleConsultationClick}
+            >
+              Consultanță Gratuită
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -147,6 +143,7 @@ const Header = ({ scrollToForm }: HeaderProps) => {
             <a
               key={link.path}
               href={link.path}
+              onClick={(e) => handleNavClick(e, link.path)}
               className={cn(
                 'block py-2 text-base font-medium',
                 currentPath === link.path
@@ -157,21 +154,12 @@ const Header = ({ scrollToForm }: HeaderProps) => {
               {link.name}
             </a>
           ))}
-          {currentPath === '/' ? (
-            <Button 
-              className="w-full mt-4 rounded-full text-white font-medium"
-              onClick={handleConsultationClick}
-            >
-              Consultanță Gratuită
-            </Button>
-          ) : (
-            <Button 
-              className="w-full mt-4 rounded-full text-white font-medium"
-              asChild
-            >
-              <a href="/contact">Consultanță Gratuită</a>
-            </Button>
-          )}
+          <Button 
+            className="w-full mt-4 rounded-full text-white font-medium"
+            onClick={handleConsultationClick}
+          >
+            Consultanță Gratuită
+          </Button>
         </div>
       </div>
     </header>
