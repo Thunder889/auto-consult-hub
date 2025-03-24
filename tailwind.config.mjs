@@ -1,21 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: {
-    files: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
-    // Exclude any deleted files that might still be referenced in the cache
-    transform: {
-      // We need to exclude some specific files that have been deleted
-      // but might still be referenced in the cache
-      exclude: [
-        '**/src/components/ContactSection.tsx', 
-        '**/src/components/Footer.tsx',
-        '**/src/components/CarsSection.tsx',
-        '**/src/components/HeroSection.tsx',
-        '**/src/components/Header.tsx'
-      ]
-    }
-  },
+  content: [
+    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
+    // Exclude specific files that have been deleted
+    '!**/src/components/ContactSection.tsx', 
+    '!**/src/components/Footer.tsx',
+    '!**/src/components/CarsSection.tsx',
+    '!**/src/components/HeroSection.tsx',
+    '!**/src/components/Header.tsx'
+  ],
   theme: {
     container: {
       center: true,
