@@ -98,9 +98,9 @@ const navLinks = [
   </div>
 </header>
 
-<script>
+<script is:inline>
   // Handle scroll effects and mobile menu functionality
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('main-header');
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -111,7 +111,7 @@ const navLinks = [
     const currentPath = window.location.pathname;
     
     // Handle scroll effects
-    const handleScroll = () => {
+    function handleScroll() {
       if (header) {
         if (window.scrollY > 10) {
           header.classList.remove('bg-transparent', 'py-6');
@@ -124,7 +124,7 @@ const navLinks = [
           }
           
           // Update desktop nav links
-          document.querySelectorAll('nav a').forEach(link => {
+          document.querySelectorAll('nav a').forEach(function(link) {
             if (!link.classList.contains('text-primary')) {
               link.classList.remove('text-gray-300', 'hover:text-gray-400');
               link.classList.add('text-gray-600', 'hover:text-black');
@@ -155,7 +155,7 @@ const navLinks = [
           }
           
           // Reset desktop nav links
-          document.querySelectorAll('nav a').forEach(link => {
+          document.querySelectorAll('nav a').forEach(function(link) {
             if (!link.classList.contains('text-black')) {
               link.classList.remove('text-gray-600', 'hover:text-black');
               link.classList.add('text-gray-300', 'hover:text-gray-400');
@@ -177,10 +177,10 @@ const navLinks = [
           }
         }
       }
-    };
+    }
     
     // Toggle mobile menu
-    const toggleMobileMenu = () => {
+    function toggleMobileMenu() {
       if (mobileMenu && menuIcon && closeIcon) {
         if (mobileMenu.classList.contains('max-h-0')) {
           // Open menu
@@ -196,11 +196,11 @@ const navLinks = [
           closeIcon.classList.add('hidden');
         }
       }
-    };
+    }
     
     // Handle consultation button clicks
-    const handleConsultationClick = (e) => {
-      e.preventDefault();
+    function handleConsultationClick(event) {
+      event.preventDefault();
       
       if (currentPath === '/') {
         // On homepage, scroll to form
@@ -212,10 +212,11 @@ const navLinks = [
         // On other pages, navigate to home page with form section hash
         window.location.href = '/#form-section';
       }
-    };
+    }
     
     // Add event listeners
     window.addEventListener('scroll', handleScroll);
+    
     if (mobileMenuToggle) {
       mobileMenuToggle.addEventListener('click', toggleMobileMenu);
     }
@@ -225,7 +226,7 @@ const navLinks = [
       consultationButton.addEventListener('click', handleConsultationClick);
     }
     
-    mobileConsultationButtons.forEach(button => {
+    mobileConsultationButtons.forEach(function(button) {
       button.addEventListener('click', handleConsultationClick);
     });
     
@@ -233,8 +234,8 @@ const navLinks = [
     handleScroll();
     
     // Add click handlers for mobile nav links to close menu after click
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
+    document.querySelectorAll('#mobile-menu a').forEach(function(link) {
+      link.addEventListener('click', function() {
         if (mobileMenu && mobileMenu.classList.contains('max-h-96')) {
           toggleMobileMenu();
         }

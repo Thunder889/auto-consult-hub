@@ -1,17 +1,17 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Providers from '@/components/Providers';
-import Header from '@/components/Header';
+import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import CarsSection from '@/components/CarsSection';
+import CarsSection from '@/components/CarsSection.astro';
 ---
 
 <Layout title="Mașini Disponibile - Smart Auto">
   <Providers client:load>
     <div class="flex flex-col min-h-screen">
-      <Header client:load />
+      <Header />
       <main class="flex-grow pt-24">
-        <CarsSection fullPage={true} client:visible />
+        <CarsSection fullPage={true} />
       </main>
       <Footer />
     </div>

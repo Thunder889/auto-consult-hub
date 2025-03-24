@@ -1,7 +1,7 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Providers from '@/components/Providers';
-import Header from '@/components/Header';
+import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import ServicesSection from '@/components/ServicesSection.astro';
 ---
@@ -9,7 +9,7 @@ import ServicesSection from '@/components/ServicesSection.astro';
 <Layout title="Servicii - Smart Auto">
   <Providers client:load>
     <div class="flex flex-col min-h-screen">
-      <Header client:load />
+      <Header />
       <main class="flex-grow pt-24">
         <ServicesSection fullPage={true} />
       </main>
