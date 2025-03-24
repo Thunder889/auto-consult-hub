@@ -1,0 +1,93 @@
+{
+  "$ref": "#/definitions/cars",
+  "definitions": {
+    "cars": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "title": {
+          "type": "string"
+        },
+        "year": {
+          "type": "number"
+        },
+        "price": {
+          "type": "string"
+        },
+        "mileage": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "externalLink": {
+          "type": "string"
+        },
+        "fullDetails": {
+          "type": "object",
+          "properties": {
+            "engine": {
+              "type": "string"
+            },
+            "power": {
+              "type": "string"
+            },
+            "transmission": {
+              "type": "string"
+            },
+            "drive": {
+              "type": "string"
+            },
+            "fuel": {
+              "type": "string"
+            },
+            "color": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "engine",
+            "power",
+            "transmission",
+            "drive",
+            "fuel",
+            "color",
+            "features"
+          ],
+          "additionalProperties": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "year",
+        "price",
+        "mileage",
+        "location",
+        "image",
+        "description",
+        "externalLink",
+        "fullDetails"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

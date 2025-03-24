@@ -46,10 +46,10 @@ const CarDetailsDialog = ({ cars }: CarDetailsDialogProps) => {
     };
     
     // Need to cast to any because CustomEvent isn't recognized in the type definition
-    window.addEventListener('showCarDetails', handleShowCarDetails as any);
+    document.addEventListener('show-car-details', handleShowCarDetails as any);
     
     return () => {
-      window.removeEventListener('showCarDetails', handleShowCarDetails as any);
+      document.removeEventListener('show-car-details', handleShowCarDetails as any);
     };
   }, [cars]);
   

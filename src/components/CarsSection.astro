@@ -1,14 +1,14 @@
 ---
 import { cn } from '../lib/utils';
-import { getCollection } from 'astro:content';
+import carsData from '../data/cars.json';
 import CarDetailsDialog from './CarDetailsDialog';
-import { Image } from 'astro:assets';
 
-// Get all car entries from the content collection
-const carEntries = await getCollection('cars');
-const cars = carEntries.length > 0 
-  ? carEntries[0].data 
-  : [];
+// Import car images directly with proper typing
+const carImages: Record<number, string> = {
+  1: '/images/cars/products/WWPassat.jpg',
+  2: '/images/cars/products/PassatAlltrack.jpg',
+  3: '/images/cars/products/FordFocus.jpg'
+};
 
 // Extract type to help with TypeScript inference in Astro
 type Car = {
@@ -37,9 +37,15 @@ interface Props {
 }
 
 const { fullPage = false } = Astro.props;
+const { cars } = carsData;
 
-// Function to get the image src
+// Function to get the image src, with fallback in case the image is not found
 function getImageSrc(car: Car): string {
+  // First check if we have a direct mapping for this car ID
+  if (carImages[car.id]) {
+    return carImages[car.id];
+  }
+  // Otherwise use the image path from the car data
   return car.image;
 }
 ---
