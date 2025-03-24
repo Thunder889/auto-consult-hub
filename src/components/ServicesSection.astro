@@ -1,0 +1,89 @@
+---
+import { Search, FileSearch, Car, UserCheck, ShieldCheck, MessageSquare, ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+interface Props {
+  fullPage?: boolean;
+}
+
+const { fullPage = false } = Astro.props;
+
+const services = [
+  {
+    icon: Search,
+    title: "Căutare Personalizată",
+    description: "Analizăm preferințele tale și bugetul disponibil pentru a găsi mașina perfectă pentru nevoile tale."
+  },
+  {
+    icon: FileSearch,
+    title: "Verificare Completă",
+    description: "Inspecție tehnică detaliată, verificarea istoricului și a kilometrajului pentru a evita surprizele neplăcute."
+  },
+  {
+    icon: Car,
+    title: "Test Drive",
+    description: "Organizăm test drive-uri pentru mașinile selectate, astfel încât să poți lua decizia corectă."
+  },
+  {
+    icon: UserCheck,
+    title: "Negociere",
+    description: "Negociem în numele tău pentru a obține cel mai bun preț și condiții favorabile."
+  },
+  {
+    icon: ShieldCheck,
+    title: "Asistență Documentație",
+    description: "Te ajutăm cu toate formalitățile legale și documentația necesară pentru achiziție."
+  },
+  {
+    icon: MessageSquare,
+    title: "Consultanță Post-Achiziție",
+    description: "Continuăm să-ți oferim suport și după achiziție pentru orice întrebări sau probleme."
+  }
+];
+---
+
+<section class={cn("section-padding bg-gray-50", { "py-0": fullPage })}>
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+        Serviciile Noastre
+      </h2>
+      <p class="text-lg text-gray-700">
+        Oferim o gamă completă de servicii de consultanță auto pentru a simplifica procesul de achiziție și a te ajuta să găsești mașina perfectă.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service, index) => (
+        <div 
+          class={cn(
+            "bg-white p-6 rounded-lg shadow-sm border border-gray-100",
+            "hover:shadow-md transition-shadow duration-300",
+            "flex flex-col items-start"
+          )}
+        >
+          <div class="text-primary mb-4">
+            <service.icon className="h-10 w-10" />
+          </div>
+          <h3 class="text-xl font-semibold mb-3 text-gray-900">{service.title}</h3>
+          <p class="text-gray-700">{service.description}</p>
+        </div>
+      ))}
+    </div>
+    
+    {!fullPage && (
+      <div class="text-center mt-16 animate-slide-up">
+        <Button 
+          asChild
+          className="rounded-full px-8 group"
+        >
+          <a href="/services">
+            Explorează Toate Serviciile
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </a>
+        </Button>
+      </div>
+    )}
+  </div>
+</section> 

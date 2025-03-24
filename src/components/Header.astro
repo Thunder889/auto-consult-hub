@@ -1,0 +1,244 @@
+---
+import { cn } from '@/lib/utils';
+
+// Get current path for active link highlighting
+const currentPath = Astro.url.pathname;
+
+// Define navigation links
+const navLinks = [
+  { name: 'Acasă', path: '/' },
+  { name: 'Despre', path: '/about' },
+  { name: 'Servicii', path: '/services' },
+  { name: 'Mașini', path: '/cars' },
+  { name: 'Contact', path: '/contact' }
+];
+---
+
+<header 
+  id="main-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-6"
+>
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center space-x-2">
+        <span class="text-2xl font-bold text-primary animated-underline">
+          Smart Auto
+        </span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex space-x-8">
+        {navLinks.map((link) => (
+          <a
+            href={link.path}
+            class={cn(
+              'text-sm font-medium animated-underline py-1',
+              currentPath === link.path 
+                ? 'text-primary' 
+                : 'text-gray-300 hover:text-gray-400'
+            )}
+          >
+            {link.name}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Contact Button (Desktop) -->
+      <div class="hidden md:block">
+        <a 
+          href="/#form-section"
+          id="consultation-button"
+          class="inline-flex items-center justify-center rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-white/50 hover:bg-white/10 h-10 px-6 py-2 hover-lift shadow-sm text-black font-medium"
+        >
+          Consultanță Gratuită
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-toggle"
+        class="md:hidden focus:outline-none"
+        aria-label="Toggle Menu"
+      >
+        <!-- Menu icon (hamburger) -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="mobile-menu-icon h-6 w-6 text-gray-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        
+        <!-- Close icon (X) - hidden by default -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="mobile-menu-close hidden h-6 w-6 text-gray-400" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu - Hidden by default -->
+  <div
+    id="mobile-menu"
+    class="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300 ease-in-out max-h-0 opacity-0 pointer-events-none overflow-hidden"
+  >
+    <div class="container mx-auto px-4 py-4 space-y-4">
+      {navLinks.map((link) => (
+        <a
+          href={link.path}
+          class={cn(
+            'block py-2 text-base font-medium',
+            currentPath === link.path
+              ? 'text-primary'
+              : 'text-muted-foreground hover:text-primary'
+          )}
+        >
+          {link.name}
+        </a>
+      ))}
+      <a 
+        href="/#form-section"
+        class="mobile-consultation-button inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full mt-4 rounded-full text-white font-medium"
+      >
+        Consultanță Gratuită
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Handle scroll effects and mobile menu functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.getElementById('main-header');
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.querySelector('.mobile-menu-icon');
+    const closeIcon = document.querySelector('.mobile-menu-close');
+    const consultationButton = document.getElementById('consultation-button');
+    const mobileConsultationButtons = document.querySelectorAll('.mobile-consultation-button');
+    const currentPath = window.location.pathname;
+    
+    // Handle scroll effects
+    const handleScroll = () => {
+      if (header) {
+        if (window.scrollY > 10) {
+          header.classList.remove('bg-transparent', 'py-6');
+          header.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+          
+          // Update button styles
+          if (consultationButton) {
+            consultationButton.classList.remove('border-white/50', 'hover:bg-white/10');
+            consultationButton.classList.add('border-primary/50', 'hover:bg-primary/10');
+          }
+          
+          // Update desktop nav links
+          document.querySelectorAll('nav a').forEach(link => {
+            if (!link.classList.contains('text-primary')) {
+              link.classList.remove('text-gray-300', 'hover:text-gray-400');
+              link.classList.add('text-gray-600', 'hover:text-black');
+            } else {
+              link.classList.remove('text-primary');
+              link.classList.add('text-black');
+            }
+          });
+          
+          // Update menu toggle icon
+          if (menuIcon && !menuIcon.classList.contains('hidden')) {
+            menuIcon.classList.remove('text-gray-400');
+            menuIcon.classList.add('text-gray-800');
+          }
+          
+          if (closeIcon && !closeIcon.classList.contains('hidden')) {
+            closeIcon.classList.remove('text-gray-400');
+            closeIcon.classList.add('text-gray-800');
+          }
+        } else {
+          header.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+          header.classList.add('bg-transparent', 'py-6');
+          
+          // Reset button styles
+          if (consultationButton) {
+            consultationButton.classList.remove('border-primary/50', 'hover:bg-primary/10');
+            consultationButton.classList.add('border-white/50', 'hover:bg-white/10');
+          }
+          
+          // Reset desktop nav links
+          document.querySelectorAll('nav a').forEach(link => {
+            if (!link.classList.contains('text-black')) {
+              link.classList.remove('text-gray-600', 'hover:text-black');
+              link.classList.add('text-gray-300', 'hover:text-gray-400');
+            } else {
+              link.classList.remove('text-black');
+              link.classList.add('text-primary');
+            }
+          });
+          
+          // Reset menu toggle icon
+          if (menuIcon && !menuIcon.classList.contains('hidden')) {
+            menuIcon.classList.remove('text-gray-800');
+            menuIcon.classList.add('text-gray-400');
+          }
+          
+          if (closeIcon && !closeIcon.classList.contains('hidden')) {
+            closeIcon.classList.remove('text-gray-800');
+            closeIcon.classList.add('text-gray-400');
+          }
+        }
+      }
+    };
+    
+    // Toggle mobile menu
+    const toggleMobileMenu = () => {
+      if (mobileMenu && menuIcon && closeIcon) {
+        if (mobileMenu.classList.contains('max-h-0')) {
+          // Open menu
+          mobileMenu.classList.remove('max-h-0', 'opacity-0', 'pointer-events-none');
+          mobileMenu.classList.add('max-h-96', 'opacity-100');
+          menuIcon.classList.add('hidden');
+          closeIcon.classList.remove('hidden');
+        } else {
+          // Close menu
+          mobileMenu.classList.remove('max-h-96', 'opacity-100');
+          mobileMenu.classList.add('max-h-0', 'opacity-0', 'pointer-events-none');
+          menuIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+        }
+      }
+    };
+    
+    // Handle consultation button clicks
+    const handleConsultationClick = (e) => {
+      e.preventDefault();
+      
+      if (currentPath === '/') {
+        // On homepage, scroll to form
+        const formSection = document.getElementById('form-section');
+        if (formSection) {
+          formSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // On other pages, navigate to home page with form section hash
+        window.location.href = '/#form-section';
+      }
+    };
+    
+    // Add event listeners
+    window.addEventListener('scroll', handleScroll);
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    }
+    
+    // Add click handler for consultation buttons
+    if (consultationButton) {
+      consultationButton.addEventListener('click', handleConsultationClick);
+    }
+    
+    mobileConsultationButtons.forEach(button => {
+      button.addEventListener('click', handleConsultationClick);
+    });
+    
+    // Run scroll handler once on load to set initial state
+    handleScroll();
+    
+    // Add click handlers for mobile nav links to close menu after click
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileMenu && mobileMenu.classList.contains('max-h-96')) {
+          toggleMobileMenu();
+        }
+      });
+    });
+  });
+</script> 

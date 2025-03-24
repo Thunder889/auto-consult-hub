@@ -1,0 +1,107 @@
+---
+import { Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import ContactForm from './ContactForm';
+---
+
+<section class="section-padding bg-gradient-to-b from-gray-50 to-white">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16 animate-slide-up">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-4">
+        Contactează-ne
+      </h2>
+      <p class="text-muted-foreground text-lg">
+        Programează o consultație gratuită pentru a găsi mașina ideală. Suntem aici să răspundem la toate întrebările tale.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+      <div class="bg-white rounded-2xl shadow-sm p-8 order-2 lg:order-1 animate-scale-in">
+        <h3 class="text-2xl font-semibold text-primary mb-6">Trimite-ne un Mesaj</h3>
+        
+        <!-- Use React component for the interactive form -->
+        <ContactForm client:visible />
+      </div>
+      
+      <div class="order-1 lg:order-2 animate-slide-up">
+        <h3 class="text-2xl font-semibold text-primary mb-8">Ia Legătura cu Noi</h3>
+        
+        <div class="space-y-8 mb-10">
+          <!-- Contact Info Items -->
+          <a 
+            href="tel:+40723456789" 
+            class="flex items-start gap-4 group"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="p-3 rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+              <Phone className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 class="font-medium text-primary">Telefon</h3>
+              <p class="text-muted-foreground group-hover:text-primary transition-colors">+40 723 456 789</p>
+            </div>
+          </a>
+          
+          <a 
+            href="mailto:contact@autolacomanda.ro" 
+            class="flex items-start gap-4 group"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="p-3 rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+              <Mail className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 class="font-medium text-primary">Email</h3>
+              <p class="text-muted-foreground group-hover:text-primary transition-colors">contact@autolacomanda.ro</p>
+            </div>
+          </a>
+          
+          <a 
+            href="https://wa.me/40723456789" 
+            class="flex items-start gap-4 group"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="p-3 rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+              <MessageCircle className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 class="font-medium text-primary">WhatsApp</h3>
+              <p class="text-muted-foreground group-hover:text-primary transition-colors">Suport Direct WhatsApp</p>
+            </div>
+          </a>
+          
+          <a 
+            href="https://goo.gl/maps/123" 
+            class="flex items-start gap-4 group"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="p-3 rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-white">
+              <MapPin className="h-5 w-5" />
+            </div>
+            <div>
+              <h3 class="font-medium text-primary">Birou</h3>
+              <p class="text-muted-foreground group-hover:text-primary transition-colors">București, România</p>
+            </div>
+          </a>
+        </div>
+        
+        <div class="bg-gray-100 rounded-2xl overflow-hidden h-64 lg:h-80">
+          <iframe
+            title="Locația Biroului"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d91158.13517807181!2d26.03060705!3d44.43792695!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1f93abf3cad4f%3A0xac0631f7a4e8c73!2sBucharest%2C%20Romania!5e0!3m2!1sen!2sus!4v1655215703743!5m2!1sen!2sus"
+            width="100%"
+            height="100%"
+            style="border: 0"
+            allowfullscreen={false}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

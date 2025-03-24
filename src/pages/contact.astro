@@ -2,8 +2,8 @@
 import Layout from '@/layouts/Layout.astro';
 import Providers from '@/components/Providers';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import ContactSection from '@/components/ContactSection';
+import Footer from '@/components/Footer.astro';
+import ContactSection from '@/components/ContactSection.astro';
 ---
 
 <Layout title="Contact - Smart Auto">
@@ -11,7 +11,7 @@ import ContactSection from '@/components/ContactSection';
     <div class="flex flex-col min-h-screen">
       <Header client:load />
       <main class="flex-grow pt-24">
-        <ContactSection client:visible />
+        <ContactSection />
       </main>
       <Footer />
     </div>

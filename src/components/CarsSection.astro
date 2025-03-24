@@ -1,0 +1,144 @@
+---
+import { cn } from '@/lib/utils';
+import carsData from '@/data/cars.json';
+import CarDetailsDialog from './CarDetailsDialog';
+
+// Extract type to help with TypeScript inference in Astro
+type Car = {
+  id: number;
+  title: string;
+  year: number;
+  price: string;
+  mileage: string;
+  location: string;
+  image: string;
+  description: string;
+  externalLink: string;
+  fullDetails: {
+    engine: string;
+    power: string;
+    transmission: string;
+    drive: string;
+    fuel: string;
+    color: string;
+    features: string[];
+  }
+}
+
+interface Props {
+  fullPage?: boolean;
+}
+
+const { fullPage = false } = Astro.props;
+const { cars } = carsData;
+---
+
+<section class:list={["section-padding bg-white", { "py-0": fullPage }]}>
+  <div class="container mx-auto px-4 md:px-6">
+    {!fullPage && (
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 animate-slide-up">
+        <div class="max-w-2xl mb-6 md:mb-0">
+          <h2 class="text-3xl md:text-4xl font-bold text-primary tracking-tight mb-4">
+            Mașini Disponibile
+          </h2>
+          <p class="text-muted-foreground text-lg">
+            Explorați selecția noastră de mașini premium disponibile acum, fiecare cu istoric verificat, documentație completă și valoare excepțională.
+          </p>
+        </div>
+        
+        <a href="/cars" class="inline-flex items-center justify-center rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 group">
+          Vezi Toate Mașinile
+          <!-- Arrow Right SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </div>
+    )}
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-scale-in">
+      {cars.map((car: Car) => (
+        <div class="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md group">
+          <div class="aspect-[16/10] overflow-hidden">
+            <img 
+              src={car.image} 
+              alt={car.title} 
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-semibold text-primary">{car.title}</h3>
+              <span class="text-lg font-bold text-primary">{car.price}</span>
+            </div>
+            
+            <div class="flex gap-4 text-sm text-muted-foreground mb-4">
+              <div class="flex items-center">
+                <!-- Calendar SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar h-4 w-4 mr-1"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                <span>{car.year}</span>
+              </div>
+              <div class="flex items-center">
+                <!-- Activity SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity h-4 w-4 mr-1"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                <span>{car.mileage}</span>
+              </div>
+              <div class="flex items-center">
+                <!-- Map Pin SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin h-4 w-4 mr-1"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                <span>{car.location}</span>
+              </div>
+            </div>
+            
+            <p class="text-muted-foreground mb-4 line-clamp-2">{car.description}</p>
+            
+            <div class="flex justify-between items-center pt-2">
+              <a 
+                href={car.externalLink} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center rounded-full text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-3 py-2"
+                title="Vezi anunțul original"
+              >
+                Vezi Anunțul
+                <!-- External Link SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3 ml-1"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+              </a>
+              
+              <button 
+                data-car-id={car.id}
+                class="car-details-button inline-flex items-center justify-center rounded-full text-xs font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-8 px-3 py-2 bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground"
+              >
+                Detalii
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  
+  <!-- This is where the React component for the dialog will be mounted -->
+  <div id="car-details-dialog">
+    <CarDetailsDialog client:visible cars={cars} />
+  </div>
+</section>
+
+<script>
+  // Handle the car detail button clicks
+  document.addEventListener('DOMContentLoaded', () => {
+    const detailButtons = document.querySelectorAll('.car-details-button');
+    
+    detailButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const carId = button.getAttribute('data-car-id');
+        if (carId) {
+          // Dispatch a custom event that the React component can listen for
+          const event = new CustomEvent('showCarDetails', { 
+            detail: { carId: parseInt(carId) } 
+          });
+          window.dispatchEvent(event);
+        }
+      });
+    });
+  });
+</script> 
