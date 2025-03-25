@@ -1,0 +1,84 @@
+---
+import { cn } from '../lib/utils';
+
+interface Testimonial {
+  name: string;
+  role: string;
+  text: string;
+  avatar?: string;
+}
+
+interface Props {
+  fullPage?: boolean;
+}
+
+const { fullPage = false } = Astro.props;
+
+// Testimonial data
+const testimonials: Testimonial[] = [
+  {
+    name: "Alexandru Popescu",
+    role: "Antreprenor",
+    text: "Serviciul de consultanță gratuită mi-a economisit mult timp și efort. Au găsit exact mașina de care aveam nevoie pentru afacerea mea, iar deducerea TVA a fost un avantaj major.",
+    avatar: "/images/testimonials/avatar1.jpg"
+  },
+  {
+    name: "Maria Ionescu",
+    role: "Manager",
+    text: "Transparența și profesionalismul echipei m-au impresionat. Factura fiscală a fost emisă prompt, iar întregul proces a fost fără stres. Recomand cu încredere!",
+    avatar: "/images/testimonials/avatar2.jpg"
+  },
+  {
+    name: "Cristian Dumitrescu",
+    role: "Director Financiar",
+    text: "Ca director financiar, apreciez atenția la detalii fiscale. TVA-ul deductibil a reprezentat o economie semnificativă pentru compania noastră. Serviciu excelent!",
+    avatar: "/images/testimonials/avatar3.jpg"
+  }
+];
+---
+
+<section class={cn("section-padding bg-gray-50", { "py-0": fullPage })}>
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+        Ce Spun Clienții Noștri
+      </h2>
+      <p class="text-lg text-gray-700">
+        Experiențele reale ale clienților care au beneficiat de serviciile noastre de consultanță auto.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {testimonials.map((testimonial: Testimonial) => (
+        <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+          <div class="text-primary mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-8 w-8 opacity-50"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path></svg>
+          </div>
+          
+          <p class="text-gray-700 mb-6 italic">"{testimonial.text}"</p>
+          
+          <div class="flex items-center">
+            <div class="flex-shrink-0 mr-4">
+              {testimonial.avatar ? (
+                <img 
+                  src={testimonial.avatar} 
+                  alt={`Poza ${testimonial.name}`}
+                  class="w-12 h-12 rounded-full object-cover"
+                  onerror="this.onerror=null; this.src='data:image/svg+xml;charset=utf-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22%3E%3Crect width=%2240%22 height=%2240%22 fill=%22%23f0f0f0%22/%3E%3Ctext x=%2220%22 y=%2225%22 font-family=%22Arial%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22%23777%22%3E' + this.alt.charAt(0) + '%3C/text%3E%3C/svg%3E';"
+                />
+              ) : (
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold">
+                  {testimonial.name.charAt(0)}
+                </div>
+              )}
+            </div>
+            <div>
+              <h4 class="font-semibold text-gray-900">{testimonial.name}</h4>
+              <p class="text-sm text-gray-500">{testimonial.role}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 

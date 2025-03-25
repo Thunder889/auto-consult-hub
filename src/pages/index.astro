@@ -5,6 +5,7 @@ import HeroSection from '@/components/HeroSection.astro';
 import AboutSection from '@/components/AboutSection.astro';
 import ServicesSection from '@/components/ServicesSection.astro';
 import CarsSection from '@/components/CarsSection.astro';
+import TestimonialsSection from '@/components/TestimonialsSection.astro';
 import ContactSection from '@/components/ContactSection.astro';
 import CarRequestForm from '@/components/CarRequestForm';
 import Header from '@/components/Header.astro';
@@ -29,7 +30,7 @@ const aboutImage = car2;
 // Generate an optimized about image - will be rendered below
 ---
 
-<Layout title="AutoLaComandă - Servicii Premium de Consultanță Auto">
+<Layout title="AutoLaComandă - Servicii Premium de Consultanță Auto" description="Servicii profesionale de consultanță auto cu consultație gratuită, factură fiscală și TVA deductibil pentru companii. Găsim mașina perfectă pentru nevoile dvs.">
   <Providers client:load>
     <div class="flex flex-col min-h-screen">
       <Header />
@@ -41,6 +42,7 @@ const aboutImage = car2;
         <AboutSection aboutImage={aboutImage} />
         <ServicesSection />
         <CarsSection />
+        <TestimonialsSection />
         <ContactSection />
       </main>
       <Footer />

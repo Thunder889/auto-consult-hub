@@ -74,15 +74,13 @@ const services = [
     
     {!fullPage && (
       <div class="text-center mt-16 animate-slide-up">
-        <Button 
-          asChild
-          className="rounded-full px-8 group"
+        <a 
+          href="/services" 
+          class="inline-flex items-center justify-center rounded-full text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-3 group"
         >
-          <a href="/services">
-            Explorează Toate Serviciile
-            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </a>
-        </Button>
+          Explorează Toate Serviciile
+          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </a>
       </div>
     )}
   </div>
