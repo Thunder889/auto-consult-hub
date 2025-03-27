@@ -16,23 +16,9 @@ export default defineConfig({
     port: 3000,
   },
   // Enable static build output
-  output: 'static',
+  output: 'server',
   // Add Vite config for path aliases
   vite: {
-    resolve: {
-      alias: {
-        '@': path.resolve('./src')
-      }
-    },
-    // Prevent null byte issues during build
-    build: {
-      rollupOptions: {
-        onwarn(warning, warn) {
-          // Ignore certain warnings
-          if (warning.code === 'INVALID_ANNOTATION') return;
-          warn(warning);
-        }
-      }
-    }
+   
   }
 }); 
