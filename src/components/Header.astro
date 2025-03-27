@@ -108,7 +108,12 @@ const navLinks = [
     const closeIcon = document.querySelector('.mobile-menu-close');
     const consultationButton = document.getElementById('consultation-button');
     const mobileConsultationButtons = document.querySelectorAll('.mobile-consultation-button');
-    const currentPath = window.location.pathname;
+    
+    // Normalize path for proper matching (remove trailing slash except for home page)
+    let currentPath = window.location.pathname;
+    if (currentPath.length > 1 && currentPath.endsWith('/')) {
+      currentPath = currentPath.slice(0, -1);
+    }
     
     // Handle scroll effects
     function handleScroll() {
