@@ -3,8 +3,6 @@ import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
 import path from 'path';
 
-import node from '@astrojs/node';
-
 // https://astro.build/config
 export default defineConfig({
   integrations: [
@@ -19,22 +17,8 @@ export default defineConfig({
     port: 3000,
   },
 
-  // Base path for production deployment
-  base: '/',
-
-  // Enable server output
-  output: 'server',
-
   // Add Vite config for path aliases
   vite: {
-    resolve: {
-      alias: {
-        '@': path.resolve('./src'),
-      },
-    },
-  },
-
-  adapter: node({
-    mode: 'standalone'
-  })
+  
+  }
 });
