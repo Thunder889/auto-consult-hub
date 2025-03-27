@@ -19,12 +19,19 @@ export default defineConfig({
     port: 3000,
   },
 
-  // Enable static build output
+  // Base path for production deployment
+  base: '/',
+
+  // Enable server output
   output: 'server',
 
   // Add Vite config for path aliases
   vite: {
-   
+    resolve: {
+      alias: {
+        '@': path.resolve('./src'),
+      },
+    },
   },
 
   adapter: node({
