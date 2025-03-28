@@ -1,0 +1,107 @@
+---
+const faqs = [
+  {
+    question: "Ce înseamnă consultanță auto și cum mă poate ajuta?",
+    answer: "Consultanța auto este un serviciu prin care experții noștri te ajută să găsești, evaluezi și achiziționezi mașina potrivită nevoilor tale. Acest serviciu include căutare personalizată, verificare tehnică, negociere cu vânzătorul și asistență pentru documentație, economisind timpul tău și evitând potențiale probleme costisitoare."
+  },
+  {
+    question: "Care este procesul de lucru cu Smart Auto?",
+    answer: "Procesul începe cu o consultație gratuită unde discutăm preferințele, bugetul și nevoile tale. Apoi, în funcție de pachetul ales, căutăm opțiuni potrivite pe piață, verificăm mașinile selectate, organizăm vizionări, negociem prețul și te asistăm în procesul de achiziție și întocmire a documentelor."
+  },
+  {
+    question: "Cât costă serviciile de consultanță auto?",
+    answer: "Oferim pachete diferite, începând de la consultanța gratuită inițială, pachete standard de la 300€ plus un comision, până la pachete premium pentru servicii complete. Prețul exact depinde de complexitatea solicitării și de pachetul ales. Comisionul se calculează din valoarea finală a mașinii achiziționate."
+  },
+  {
+    question: "Cât timp durează procesul de găsire și achiziție a unei mașini?",
+    answer: "Durata variază în funcție de specificațiile căutate și disponibilitatea pe piață. În general, procesul durează între 1-4 săptămâni. Pentru mașini rare sau cu specificații deosebite, timpul poate fi mai lung. Te vom ține la curent cu progresul căutării și te vom implica în decizii la fiecare etapă."
+  },
+  {
+    question: "Ce înseamnă verificarea tehnică și ce include?",
+    answer: "Verificarea tehnică include inspecția detaliată a stării mașinii, verificarea sistemelor mecanice, electrice și electronice, evaluarea caroseriei, identificarea reparațiilor anterioare, testarea funcționalității tuturor componentelor, verificarea kilometrajului și a istoricului de service. Scopul este identificarea oricăror probleme potențiale."
+  },
+  {
+    question: "Lucrați și cu mașini din străinătate sau doar din România?",
+    answer: "Da, lucrăm atât cu mașini din România, cât și din străinătate. Pentru pachetele premium, oferim servicii extinse de căutare pe piețele europene, verificare la distanță, coordonare transport și asistență pentru toate formalitățile de import și înmatriculare."
+  },
+  {
+    question: "Oferiti garanție pentru serviciile prestate?",
+    answer: "Oferim garanția profesionalismului și a diligenței în toate serviciile noastre. Nu putem oferi garanție pentru mașina în sine (aceasta vine de la vânzător sau dealer), dar ne asigurăm că primești toate informațiile relevante despre starea mașinii înainte de achiziție pentru a lua o decizie informată."
+  },
+  {
+    question: "Ce se întâmplă dacă nu găsim mașina potrivită?",
+    answer: "Dacă după perioada de căutare nu reușim să găsim o mașină care să corespundă criteriilor stabilite, vom discuta opțiunile: ajustarea criteriilor, extinderea perioadei de căutare, sau returnarea unui procent din avansul plătit (conform termenilor din contract)."
+  }
+];
+---
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+        Întrebări Frecvente
+      </h2>
+      <p class="text-lg text-gray-700">
+        Află răspunsuri la cele mai comune întrebări despre serviciile noastre de consultanță auto.
+      </p>
+    </div>
+    
+    <div class="max-w-4xl mx-auto divide-y divide-gray-200 rounded-xl border border-gray-200 bg-white">
+      {faqs.map((faq, index) => (
+        <details class="group p-6" open={index === 0}>
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 text-gray-900">
+            <h3 class="text-lg font-medium">
+              {faq.question}
+            </h3>
+            
+            <span class="relative h-5 w-5 shrink-0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute inset-0 h-5 w-5 opacity-100 group-open:opacity-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="absolute inset-0 h-5 w-5 opacity-0 group-open:opacity-100"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </span>
+          </summary>
+
+          <p class="mt-4 leading-relaxed text-gray-700">
+            {faq.answer}
+          </p>
+        </details>
+      ))}
+    </div>
+    
+    <div class="text-center mt-12">
+      <p class="text-gray-700 mb-4">Nu ai găsit răspunsul la întrebarea ta?</p>
+      <a 
+        href="/contact"
+        class="inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors bg-white text-primary border border-primary hover:bg-primary/5 px-6 py-3"
+      >
+        Contactează-ne pentru mai multe detalii
+      </a>
+    </div>
+  </div>
+</section> 

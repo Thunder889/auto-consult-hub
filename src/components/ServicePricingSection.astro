@@ -1,0 +1,143 @@
+import { Check, X } from 'lucide-react';
+
+const pricingPlans = [
+  {
+    name: "Consultanță Gratuită",
+    price: "0",
+    description: "Consultanță inițială gratuită pentru toți clienții potențiali",
+    features: [
+      "Evaluare inițială a nevoilor",
+      "Sugestii pentru buget și modele",
+      "Discuție telefonică de 30 minute",
+      "Recomandări generale",
+    ],
+    notIncluded: [
+      "Căutare personalizată",
+      "Verificare completă",
+      "Negociere cu vânzătorul",
+      "Asistență documentație"
+    ],
+    cta: "Programează consultație",
+    popular: false
+  },
+  {
+    name: "Pachet Standard",
+    price: "300",
+    suffix: "+ comision 1%",
+    description: "Serviciu complet de consultanță pentru achiziția unui vehicul",
+    features: [
+      "Căutare personalizată",
+      "Verificare tehnică de bază",
+      "Verificare istoric (RAR)",
+      "Programare vizionări",
+      "Negociere preț",
+      "Asistență documentație"
+    ],
+    notIncluded: [
+      "Negociere avansată",
+      "Verificare tehnică detaliată",
+      "Consultanță post-achiziție extinsă"
+    ],
+    cta: "Alege acest pachet",
+    popular: true
+  },
+  {
+    name: "Pachet Premium",
+    price: "600",
+    suffix: "+ comision 1.5%",
+    description: "Serviciu complet și extins pentru clienții exigenți",
+    features: [
+      "Căutare extinsă pe piața internă și externă",
+      "Verificare tehnică detaliată",
+      "Verificare completă istoric",
+      "Negociere avansată",
+      "Coordonare completă a achiziției",
+      "Documentație completă și asistență",
+      "Consultanță post-achiziție (6 luni)",
+      "Prioritate la programări"
+    ],
+    notIncluded: [],
+    cta: "Contactează-ne",
+    popular: false
+  }
+];
+
+<section class="py-16 bg-white">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+        Pachete și Prețuri
+      </h2>
+      <p class="text-lg text-gray-700">
+        Oferim pachete de servicii adaptate nevoilor tale, de la consultanță gratuită până la asistență completă în procesul de achiziție.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {pricingPlans.map((plan) => (
+        <div class={`relative flex flex-col rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${plan.popular ? 'border-2 border-primary' : 'border border-gray-200'}`}>
+          {plan.popular && (
+            <div class="absolute top-0 right-0 bg-primary text-white py-1 px-4 text-sm font-medium">
+              Popular
+            </div>
+          )}
+          <div class="p-6 bg-white flex-grow">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+            <div class="flex items-baseline mt-4 mb-6">
+              <span class="text-4xl font-extrabold">{plan.price} €</span>
+              {plan.suffix && <span class="ml-1 text-gray-500">{plan.suffix}</span>}
+            </div>
+            <p class="text-gray-600 mb-6">{plan.description}</p>
+            <div class="space-y-4">
+              <p class="font-medium">Include:</p>
+              <ul class="space-y-3">
+                {plan.features.map((feature) => (
+                  <li class="flex items-start">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+              
+              {plan.notIncluded.length > 0 && (
+                <>
+                  <p class="font-medium pt-2">Nu include:</p>
+                  <ul class="space-y-3">
+                    {plan.notIncluded.map((feature) => (
+                      <li class="flex items-start">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        <span class="text-gray-500">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </div>
+          </div>
+          <div class="p-6 bg-gray-50 border-t border-gray-100">
+            <a 
+              href="/#form-section"
+              class={`w-full inline-flex justify-center items-center rounded-md px-4 py-3 text-sm font-medium transition-colors 
+                ${plan.popular 
+                  ? 'bg-primary text-white hover:bg-primary/90 focus:ring-2 focus:ring-primary focus:ring-offset-2' 
+                  : 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2'
+                }`}
+            >
+              {plan.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="text-center mt-12 text-gray-600 max-w-3xl mx-auto">
+      <p class="text-sm">* Toate prețurile sunt în Euro și nu includ TVA. Comisionul se calculează din valoarea finală a vehiculului achiziționat.</p>
+      <p class="text-sm mt-2">* Pentru detalii suplimentare sau oferte personalizate, vă rugăm să ne contactați direct.</p>
+    </div>
+  </div>
+</section> 

@@ -1,0 +1,106 @@
+import { Star, Quote } from 'lucide-react';
+
+interface Testimonial {
+  name: string;
+  role: string;
+  content: string;
+  rating: number;
+  image: string;
+}
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Alexandru Popescu",
+    role: "Manager IT",
+    content: "Am avut parte de un serviciu impecabil. Consultantul a înțeles exact ce căutam și m-a ajutat să găsesc o mașină care depășește așteptările mele. Procesul a fost simplu și transparent de la început până la sfârșit.",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/men/32.jpg"
+  },
+  {
+    name: "Maria Ionescu",
+    role: "Antreprenor",
+    content: "Ca persoană ocupată, am apreciat enorm că echipa Smart Auto s-a ocupat de toate aspectele achiziției. Au negociat un preț excelent și m-au scutit de stresul și timpul pierdut cu documentația. Recomand cu încredere!",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/women/44.jpg"
+  },
+  {
+    name: "Mihai Dumitrescu",
+    role: "Doctor",
+    content: "Serviciul de verificare tehnică a fost foarte amănunțit. Au descoperit probleme pe care eu nu le-aș fi observat și m-au ajutat să evit o achiziție problematică. Profesionalismul lor m-a convins să revin pentru următoarea mașină.",
+    rating: 4,
+    image: "https://randomuser.me/api/portraits/men/15.jpg"
+  },
+  {
+    name: "Elena Stancu",
+    role: "Profesor universitar",
+    content: "Am apelat la Smart Auto pentru prima mea mașină și am primit exact ce aveam nevoie: sfaturi clare, opțiuni bine verificate și asistență completă. Prețul serviciului a fost pe deplin justificat de calitatea mașinii achiziționate.",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/women/22.jpg"
+  }
+];
+
+// Function to render stars based on rating
+const renderStars = (rating: number) => {
+  return Array.from({ length: 5 }).map((_, i) => (
+    i < rating 
+      ? `<Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />` 
+      : `<Star className="h-4 w-4 text-gray-300" />`
+  )).join('');
+};
+
+<section class="py-16 bg-gray-50">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+        Ce Spun Clienții Noștri
+      </h2>
+      <p class="text-lg text-gray-700">
+        Peste 200 de clienți mulțumiți ne recomandă serviciile de consultanță auto. Iată câteva dintre experiențele lor.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {testimonials.map((testimonial) => (
+        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-100 relative">
+          <div class="absolute -top-4 -left-4 bg-primary rounded-full p-2 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+              <path d="M3 21c3.73-2.92 6-7.1 6-11V3"></path>
+              <path d="M15 21c3.73-2.92 6-7.1 6-11V3"></path>
+            </svg>
+          </div>
+          
+          <div class="flex items-center mb-4">
+            <img
+              src={testimonial.image}
+              alt={testimonial.name}
+              class="h-12 w-12 rounded-full object-cover mr-4"
+            />
+            <div>
+              <h4 class="font-semibold text-gray-900">{testimonial.name}</h4>
+              <p class="text-sm text-gray-600">{testimonial.role}</p>
+            </div>
+          </div>
+          
+          <div class="flex mb-4">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <svg xmlns="http://www.w3.org/2000/svg" class={`h-4 w-4 ${i < testimonial.rating ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+            ))}
+          </div>
+          
+          <p class="text-gray-700 italic">"{testimonial.content}"</p>
+        </div>
+      ))}
+    </div>
+    
+    <div class="text-center mt-12">
+      <a 
+        href="/#form-section"
+        class="inline-flex items-center justify-center rounded-full text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 bg-primary text-white hover:bg-primary/90 px-6 py-3"
+      >
+        Solicită o Consultație Gratuită
+      </a>
+    </div>
+  </div>
+</section> 
